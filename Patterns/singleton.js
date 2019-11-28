@@ -2,18 +2,19 @@ let instance = null;
 
 class DataBase {
     constructor() {
-        this.isOpenConnection = false;
-    }
+        if (instance) {
+            return instance;
+        }
 
+        instance = this;
+        this.isConnectionOpened  = false;
+    }
     openConnection() {
-        const createConnection = new Connection();
-        this.isOpenConnection = true;
+        this.isConnectionOpened  = true;
     }
 
     closeConnection() {
-        const removeConnection = new Connection();
-
-        if(removeConnection.closeConnection()) {
+        if(this.isConnectionOpened) {
             this.isOpenConnection = false;
         } else {
             console.log("Connection isn't open");
@@ -25,33 +26,12 @@ class DataBase {
     }
 }
 
-class Connection {
-    constructor() {
-        if (!instance) {
-            instance = this;
-        }
-
-        this.connection = true;
-
-        return instance;
-    }
-    
-    closeConnection() {
-        if (this.connection) {
-            this.connection = false;
-
-            return true;
-        }
-
-        return false;
-    }
-}
 
 let newDataBase = new DataBase();
+console.log(newDataBase.isConnectionOpened);
 newDataBase.openConnection();
-console.log(newDataBase.isOpenConnection);
-newDataBase.executeQueries();
+console.log(newDataBase.isConnectionOpened);
+
+let newDataBase2 = new DataBase();
+console.log(newDataBase2.isConnectionOpened);
 newDataBase.closeConnection();
-console.log(newDataBase.isOpenConnection);
-newDataBase.closeConnection();
-newDataBase.executeQueries();
