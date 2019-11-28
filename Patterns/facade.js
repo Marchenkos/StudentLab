@@ -1,6 +1,6 @@
 class VideoFile {
     constructor(fileName) {
-        this.file = fileName;
+        this.name = fileName;
     }
 }
 
@@ -44,15 +44,15 @@ class VideoConverter {
 
 class SimpleConverter {
     convert(fileName, format) {
-        let video = new VideoFile(fileName);
+        let videoFile = new VideoFile(fileName);
         let converter = new VideoConverter();
 
         if (format == "MPG4") {
             let mpg4 = new MPG4Codec();
-            converter.convert(video.file, mpg4)
+            converter.convert(videoFile.name, mpg4)
         } else if(format == "OGG") {
             let ogg = new OGGCodec();
-            converter.convert(video.file, ogg);
+            converter.convert(videoFile.name, ogg);
         } else {
             console.log("No corect format. Choose between MPG4 and OGG");
         }

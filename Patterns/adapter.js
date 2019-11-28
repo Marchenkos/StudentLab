@@ -8,13 +8,13 @@ class IJSON {
     }
 }
 
-class XMLFormat extends IXML {
+class XMLFormatTransformer  extends IXML {
     showInXMLFormat(value) {
         return value;
     }
 }
 
-class JSONFormat extends IJSON {
+class JSONFormatTransformer extends IJSON {
     showInJSONFormat(value) {
         return value[value.length - 1];
     }
@@ -33,7 +33,7 @@ class ListOfBooks {
 class XMLToJSONFormatAdapter extends IXML{
     constructor() {
         super();
-        this.JSONFormat = new JSONFormat();
+        this.JSONFormat = new JSONFormatTransformer();
     }
 
     showInXMLFormat(value) {
@@ -42,7 +42,7 @@ class XMLToJSONFormatAdapter extends IXML{
 }
 
 let newList = new ListOfBooks([1, 2, 3, 4]);
-let newXmlFormat = new XMLFormat();
+let newXmlFormat = new XMLFormatTransformer();
 console.log(newList.show(newXmlFormat));
 
 let transform = new XMLToJSONFormatAdapter();

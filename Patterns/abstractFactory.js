@@ -177,17 +177,17 @@ class Car {
     }
 }
 
-let newExtraCar = new Car(new ExtraCar);
+let newExtraCar = new Car(new ExtraCar());
 newExtraCar.showEngine();
 newExtraCar.showWeels();
 newExtraCar.showSuspension();
 
-let newEconomyCar = new Car(new EconomyCar);
+let newEconomyCar = new Car(new EconomyCar());
 newEconomyCar.showEngine();
 newEconomyCar.showWeels();
 newEconomyCar.showSuspension();
 
-let newStandartCar = new Car(new StandardCar);
+let newStandartCar = new Car(new StandardCar());
 newStandartCar.showEngine();
 newStandartCar.showWeels();
 newStandartCar.showSuspension();
