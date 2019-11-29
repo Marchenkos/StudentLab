@@ -9,6 +9,7 @@ class DataBase {
         instance = this;
         this.isConnectionOpened  = false;
     }
+
     openConnection() {
         this.isConnectionOpened  = true;
     }
