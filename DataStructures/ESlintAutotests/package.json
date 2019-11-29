@@ -1,0 +1,59 @@
+{
+  "name": "js-library-autotests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "js_lib.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json"
+    ],
+    "setupFilesAfterEnv": [
+      "jest-extended"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Marchenkos/Task_ESlint_Autotests.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Marchenkos/Task_ESlint_Autotests/issues"
+  },
+  "homepage": "https://github.com/Marchenkos/Task_ESlint_Autotests#readme",
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-dynamic-import-node": "^2.3.0",
+    "eslint": "^6.4.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-loader": "^3.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "jest-extended": "^0.11.2",
+    "path": "^0.12.7",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "dependencies": {
+    "glob": "^7.1.4",
+    "jest": "^24.9.0",
+    "save": "^2.4.0"
+  }
+}
