@@ -10,10 +10,22 @@ const mapStateToProps = state => {
             pop: ["Sia", "Ed Sheeran", "Michael Jackson"],
             jazz: ["Kenny G", "Bill Evans"],
             rap: ["Eminem", "Noize MC", "Atmosphere"]
+        },
+        icons: {
+            rock: ["Three Days Grace", "Linkin Park", "AC/DC"],
+            pop: ["Sia", "Ed Sheeran", "Michael Jackson"],
+            jazz: ["Kenny G", "Bill Evans"],
+            rap: ["Eminem", "Noize MC", "Atmosphere"]
+        },
+        films: {
+            rock: ["Three Days Grace", "Linkin Park", "AC/DC"],
+            pop: ["Sia", "Ed Sheeran", "Michael Jackson"],
+            jazz: ["Kenny G", "Bill Evans"],
+            rap: ["Eminem", "Noize MC", "Atmosphere"]
         } },
-        currentTables: state.currentTables,
-        currentCells: state.currentCells,
-        result: state.result
+        currentTables: state.filterTables.currentTables,
+        currentCells: state.filterCells.currentCells,
+        result: state.filterEements.result
     };
 };
 

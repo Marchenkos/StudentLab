@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Context from "./Context";
 import Dimensions from "./Dimensions";
 import SearchSection from "./SearchSection";
@@ -11,48 +11,49 @@ import "../style/filters.less";
 export default function Filters({
     filters, currentTables, currentCells, result, addTable, addCell, addElement, removeTable, removeCell, removeElement }) {
 
-    const [cellsForFilter, setCellsForFilter] = useState([]);
+    const [cellsForFilter, setCellsForFilter] = useState({});
     const [elementsForFilter, setElementsForFilter] = useState([]);
-    const [tablesForFilter, setTablesForFilter] = useState([]);
+
 
     useEffect(() => {
-        const newCellsForFilter = [];
+        const newCellsForFilter = {};
 
-        for (const table of currentTables) {
-            for (const cell in table) {
-                newCellsForFilter.push(cell);
+        for (const table in filters) {
+            if (currentTables.includes(table)) {
+                for (const value in table) {
+                    newCellsForFilter.value = table[value];
+                }
             }
         }
 
         setCellsForFilter(newCellsForFilter);
-
     }, [currentTables]);
 
     useEffect(() => {
-        const newElementsForFilter = [];
+        const newElementsForFilter = {};
 
-        for (const table of currentCells) {
-            newTablesForFilter.push(table);
+        for (const cell in cellsForFilter) {
+            if (currentCells.includes(cell)) {
+                newElementsForFilter.cell = cellsForFilter[cell];
+            }
         }
 
-        setTablesForFilter(newTablesForFilter);
+        setElementsForFilter(newElementsForFilter);
     }, [currentCells]);
 
-    useEffect(() => {
-        const newTablesForFilter = [];
-
-        for (const table in filters) {
-            newTablesForFilter.push(table);
-        }
-
-        setTablesForFilter(newTablesForFilter);
-    }, [filters]);
-
-    const changeContext = tableName => {
-        if (currentTables.hasOwnProperty(tableName)) {
-            removeTable(tableName);
+    const changeResult = elementName => {
+        if (result.includes(elementName)) {
+            removeElement(elementName);
         } else {
+            addElement(elementName);
+        }
+    };
+
+    const changeContext = (tableName, condition) => {
+        if (condition) {
             addTable(tableName);
+        } else {
+            removeTable(tableName);
         }
     };
 
@@ -63,14 +64,6 @@ export default function Filters({
             addCell(cellName);
         }
     };
-
-    const changeResult = useCallback(elementName => {
-        if (result.includes(elementName)) {
-            removeElement(elementName);
-        } else {
-            addElement(elementName);
-        }
-    }, [currentCells]);
 
     return (
         <main className="filter">
@@ -91,7 +84,7 @@ export default function Filters({
                 <hr />
                 <SearchSection />
                 <OrderSection />
-                <FilterSection changeResult={changeResult} currentContext={customElements} />
+                <FilterSection changeResult={changeResult} currentElements={elementsForFilter} />
                 <hr />
             </div>
         </main>

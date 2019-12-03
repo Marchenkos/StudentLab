@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import removeUncheckedElement from "./removeUncheckedElement";
-import addCheckedElement from "./addCheckedElement";
+import filterEements from "./filterEementReducer";
+import filterCells from "./filterCellReducer";
+import filterTables from "./filterTableReducer";
 
 export default combineReducers({
-    checkedElements: addCheckedElement,
-    uncheckedElements: removeUncheckedElement
+    filterEements,
+    filterCells,
+    filterTables
 });

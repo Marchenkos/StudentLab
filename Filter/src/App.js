@@ -1,10 +1,10 @@
 import React from "react";
-import Filters from "./components/Filters";
+import FilterContainer from "./containers/FilterContainer";
 
 export default class App extends React.Component {
     render() {
         return (
-            <Filters />
+            <FilterContainer />
         );
     }
 }
