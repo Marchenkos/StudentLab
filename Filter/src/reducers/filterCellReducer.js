@@ -10,7 +10,7 @@ export default function filterCells(state = defaultState, action) {
     case CHECKED_CELL:
         return {
             ...state,
-            currentCells: state.currentCells.push(action.checkedCell)
+            currentCells: [...state.currentCells, action.checkedCell]
         };
     case UNCHECKED_CELL:
         return {

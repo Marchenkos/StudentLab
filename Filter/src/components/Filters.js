@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Context from "./Context";
-import Dimensions from "./Dimensions";
+import FiltersList from "./FiltersList";
 import SearchSection from "./SearchSection";
 import OrderSection from "./OrderSection";
 import FilterSection from "./FilterSection";
@@ -9,19 +8,19 @@ import closeButton from "../img/delete-cross.png";
 import "../style/filters.less";
 
 export default function Filters({
-    filters, currentTables, currentCells, result, addTable, addCell, addElement, removeTable, removeCell, removeElement }) {
+    filters, currentTables, currentCells, addTable, addCell, addElement, removeTable, removeCell, removeElement }) {
 
     const [cellsForFilter, setCellsForFilter] = useState({});
     const [elementsForFilter, setElementsForFilter] = useState([]);
-
+    const [isFilterOpen, setisFilterOpen] = useState(true);
 
     useEffect(() => {
         const newCellsForFilter = {};
 
         for (const table in filters) {
             if (currentTables.includes(table)) {
-                for (const value in table) {
-                    newCellsForFilter.value = table[value];
+                for (const value in filters[table]) {
+                    newCellsForFilter[value] = filters[table][value];
                 }
             }
         }
@@ -30,23 +29,25 @@ export default function Filters({
     }, [currentTables]);
 
     useEffect(() => {
-        const newElementsForFilter = {};
+        const newElementsForFilter = [];
 
         for (const cell in cellsForFilter) {
             if (currentCells.includes(cell)) {
-                newElementsForFilter.cell = cellsForFilter[cell];
+                for (const element of cellsForFilter[cell]) {
+                    newElementsForFilter.push(element);
+                }
             }
         }
 
         setElementsForFilter(newElementsForFilter);
     }, [currentCells]);
 
-    const changeResult = elementName => {
-        if (result.includes(elementName)) {
-            removeElement(elementName);
-        } else {
-            addElement(elementName);
-        }
+    const sortFilters = list => {
+        setElementsForFilter(list);
+    };
+
+    const changeFilterMode = () => {
+        setisFilterOpen(!isFilterOpen);
     };
 
     const changeContext = (tableName, condition) => {
@@ -57,12 +58,24 @@ export default function Filters({
         }
     };
 
-    const changeDimensions = cellName => {
-        if (currentCells.includes(cellName)) {
-            removeCell(cellName);
+    const changeResult = (elementName, condition) => {
+        if (condition) {
+            addElement(elementName);
         } else {
-            addCell(cellName);
+            removeElement(elementName);
         }
+    };
+
+    const changeDimensions = (cellName, condition) => {
+        if (condition) {
+            addCell(cellName);
+        } else {
+            removeCell(cellName);
+        }
+    };
+
+    const searchByName = value => {
+        setElementsForFilter(value);
     };
 
     return (
@@ -72,21 +85,25 @@ export default function Filters({
                     <img className="filter-icon" alt="arrow" src={filterIcon} />
                 </span>
                 <span className="title-block__name">filters</span>
-                <span className="title-block__close-button">
+                <span className="title-block__close-button" onClick={changeFilterMode}>
                     <img className="close-button" alt="arrow" src={closeButton} />
                 </span>
             </div>
-
-            <div className="filter__conditions">
-                <Context changeContext={changeContext} currentContext={filters} />
-                <hr />
-                <Dimensions changeDimensions={changeDimensions} currentDimensions={cellsForFilter} />
-                <hr />
-                <SearchSection />
-                <OrderSection />
-                <FilterSection changeResult={changeResult} currentElements={elementsForFilter} />
-                <hr />
-            </div>
+            {
+                isFilterOpen ? (
+                    <div className="filter__conditions">
+                        <FiltersList changeContext={changeContext} currentContext={filters} title="topic" />
+                        <hr />
+                        <FiltersList changeContext={changeDimensions} currentContext={cellsForFilter} title="section" />
+                        <hr />
+                        <SearchSection sortFilters={elementsForFilter} searchByName={searchByName} />
+                        <OrderSection filtersList={elementsForFilter} sortFilters={sortFilters} />
+                        <FilterSection changeResult={changeResult} currentElements={elementsForFilter} />
+                        <hr />
+                    </div>
+                )
+                    : null
+            }
         </main>
     );
 }
