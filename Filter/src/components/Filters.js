@@ -8,17 +8,17 @@ import closeButton from "../img/delete-cross.png";
 import "../style/filters.less";
 
 export default function Filters({
-    filters, currentTables, currentCells, addTable, addCell, addElement, removeTable, removeCell, removeElement }) {
+    filters, currentFilters, addFilters, removeFilters }) {
 
     const [cellsForFilter, setCellsForFilter] = useState({});
     const [elementsForFilter, setElementsForFilter] = useState([]);
-    const [isFilterOpen, setisFilterOpen] = useState(true);
+    const [isFilterOpen, setIsFilterOpen] = useState(true);
 
     useEffect(() => {
         const newCellsForFilter = {};
 
         for (const table in filters) {
-            if (currentTables.includes(table)) {
+            if (currentFilters[0].includes(table)) {
                 for (const value in filters[table]) {
                     newCellsForFilter[value] = filters[table][value];
                 }
@@ -26,13 +26,13 @@ export default function Filters({
         }
 
         setCellsForFilter(newCellsForFilter);
-    }, [currentTables]);
+    }, [currentFilters[0]]);
 
     useEffect(() => {
         const newElementsForFilter = [];
 
         for (const cell in cellsForFilter) {
-            if (currentCells.includes(cell)) {
+            if (currentFilters[1].includes(cell)) {
                 for (const element of cellsForFilter[cell]) {
                     newElementsForFilter.push(element);
                 }
@@ -40,17 +40,17 @@ export default function Filters({
         }
 
         setElementsForFilter(newElementsForFilter);
-    }, [currentCells]);
+    }, [currentFilters[1]]);
 
     const sortFilters = list => {
         setElementsForFilter(list);
     };
 
     const changeFilterMode = () => {
-        setisFilterOpen(!isFilterOpen);
+        setIsFilterOpen(!isFilterOpen);
     };
 
-    const changeContext = (tableName, condition) => {
+    const changeContext = (filtersName, condition) => {
         if (condition) {
             addTable(tableName);
         } else {
