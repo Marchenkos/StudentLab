@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from "react";
 import FiltersList from "./FiltersList";
-import SearchSection from "./SearchSection";
-import OrderSection from "./OrderSection";
 import FilterSection from "./FilterSection";
 import filterIcon from "../img/filterIcon.png";
 import closeButton from "../img/delete-cross.png";
 import "../style/filters.less";
 
 export default function Filters({
-    filters, currentFilters, addFilters, removeFilters }) {
+    filters, currentTables, currentCells, addTable, addCell, addElement, removeTable, removeCell, removeElement }) {
 
     const [cellsForFilter, setCellsForFilter] = useState({});
     const [elementsForFilter, setElementsForFilter] = useState([]);
-    const [isFilterOpen, setIsFilterOpen] = useState(true);
+    const [isFilterOpen, setisFilterOpen] = useState(true);
 
     useEffect(() => {
         const newCellsForFilter = {};
 
         for (const table in filters) {
-            if (currentFilters[0].includes(table)) {
+            if (currentTables.includes(table)) {
                 for (const value in filters[table]) {
                     newCellsForFilter[value] = filters[table][value];
                 }
@@ -26,13 +24,13 @@ export default function Filters({
         }
 
         setCellsForFilter(newCellsForFilter);
-    }, [currentFilters[0]]);
+    }, [currentTables]);
 
     useEffect(() => {
         const newElementsForFilter = [];
 
         for (const cell in cellsForFilter) {
-            if (currentFilters[1].includes(cell)) {
+            if (currentCells.includes(cell)) {
                 for (const element of cellsForFilter[cell]) {
                     newElementsForFilter.push(element);
                 }
@@ -40,17 +38,15 @@ export default function Filters({
         }
 
         setElementsForFilter(newElementsForFilter);
-    }, [currentFilters[1]]);
-
-    const sortFilters = list => {
-        setElementsForFilter(list);
-    };
+    }, [currentCells]);
 
     const changeFilterMode = () => {
-        setIsFilterOpen(!isFilterOpen);
+        setisFilterOpen(!isFilterOpen);
+        setCellsForFilter({});
+        setElementsForFilter([]);
     };
 
-    const changeContext = (filtersName, condition) => {
+    const changeContext = (tableName, condition) => {
         if (condition) {
             addTable(tableName);
         } else {
@@ -74,10 +70,6 @@ export default function Filters({
         }
     };
 
-    const searchByName = value => {
-        setElementsForFilter(value);
-    };
-
     return (
         <main className="filter">
             <div className="filter__title">
@@ -96,14 +88,13 @@ export default function Filters({
                         <hr />
                         <FiltersList changeContext={changeDimensions} currentContext={cellsForFilter} title="section" />
                         <hr />
-                        <SearchSection sortFilters={elementsForFilter} searchByName={searchByName} />
-                        <OrderSection filtersList={elementsForFilter} sortFilters={sortFilters} />
                         <FilterSection changeResult={changeResult} currentElements={elementsForFilter} />
                         <hr />
                     </div>
                 )
                     : null
             }
+            <button className="filter__loadButton">Load</button>
         </main>
     );
 }

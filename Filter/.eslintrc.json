@@ -41,6 +41,7 @@
         "indent":["error", 4],
         "padded-blocks":"off",
         "eqeqeq": "off",
+        "prefer-const":"off",
         "react/jsx-props-no-spreading": "off",
         "import/prefer-default-export": "off",
         "no-trailing-spaces":"error",
