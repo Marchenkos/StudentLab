@@ -8,7 +8,7 @@ export default function FiltersList({ changeContext, currentContext, title }) {
     const [isShowList, setShowList] = useState(false);
     const [listOfFilters, setlistOfFilters] = useState([]);
 
-    const checkFilter = useCallback(e => {
+    const chooseFilter = useCallback(e => {
         changeContext(e.target.value, e.target.checked);
     }, []);
 
@@ -37,7 +37,7 @@ export default function FiltersList({ changeContext, currentContext, title }) {
             <div className="contexts-box__title">
                 {title}
                 <div className="conditionsForRilter">
-                    {isShowList ? isHasFilters(listOfFilters, checkFilter) : null}
+                    {isShowList ? isHasFilters(listOfFilters, chooseFilter) : null}
                 </div>
             </div>
         </div>

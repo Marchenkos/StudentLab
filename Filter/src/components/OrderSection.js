@@ -3,7 +3,8 @@ import "../style/order-section.less";
 
 export default function OrderSection({ filtersList, sortFilters }) {
     const alphabeticalOrder = useCallback(() => {
-        sortFilters(filtersList.sort());
+        const sortingArray = filtersList;
+        sortFilters(sortingArray.sort());
     }, [filtersList]);
 
     return (

@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import filterEements from "./filterEementReducer";
 import filterCells from "./filterCellReducer";
-import filterTables from "./filtersListReducer";
+import filterTables from "./filterTableReducer";
 
 export default combineReducers({
     filterEements,

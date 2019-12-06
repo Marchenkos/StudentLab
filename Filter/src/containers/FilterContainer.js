@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import Filters from "../components/Filters";
-import { uncheckedFilter, checkedFilter } from "../actions/checkedFilter";
+import { checkedTable, checkedCell, checkedElement } from "../actions/checkedElements";
+import { uncheckedTable, uncheckedCell, uncheckedElement } from "../actions/uncheckedElements";
 
 const mapStateToProps = state => {
     return {
@@ -21,14 +22,20 @@ const mapStateToProps = state => {
             fantasy: ["Kenny G", "Bill Evans"],
             advantage: ["Eminem", "Noize MC", "Atmosphere"]
         } },
-        currentFilters: state.currentFilters
+        currentTables: state.filterTables.currentTables,
+        currentCells: state.filterCells.currentCells,
+        result: state.filterEements.result
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        addFilters: filterNames => dispatch(checkedFilter(filterNames)),
-        removeFilters: filterNames => dispatch(uncheckedFilter(filterNames)),
+        addTable: tableName => dispatch(checkedTable(tableName)),
+        addCell: cellName => dispatch(checkedCell(cellName)),
+        addElement: elementName => dispatch(checkedElement(elementName)),
+        removeTable: tableName => dispatch(uncheckedTable(tableName)),
+        removeCell: cellName => dispatch(uncheckedCell(cellName)),
+        removeElement: elementName => dispatch(uncheckedElement(elementName)),
     };
 };
 
