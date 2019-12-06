@@ -11,16 +11,15 @@ const mapStateToProps = state => {
             jazz: ["Kenny G", "Bill Evans"],
             rap: ["Eminem", "Noize MC", "Atmosphere"]
         },
-        icons: {
-            png: ["Three Days Grace", "Linkin Park", "AC/DC"],
-            jpeg: ["Sia", "Ed Sheeran", "Michael Jackson"],
-            svg: ["Kenny G", "Bill Evans"],
+        literature: {
+            novel: ["The Master and Margarita", "Pride and Prejudice"],
+            story: ["Flowers for Algernon", "Triumphal Arch", "Roadside Picnic"]
         },
         films: {
-            comedy: ["Three Days Grace", "Linkin Park", "AC/DC"],
-            horror: ["Sia", "Ed Sheeran", "Michael Jackson"],
-            fantasy: ["Kenny G", "Bill Evans"],
-            advantage: ["Eminem", "Noize MC", "Atmosphere"]
+            comedy: ["The Hot Chick", "Dumb and Dumber", "Bean"],
+            horror: ["Aliens", "Room 237", "Dracula"],
+            fantasy: [" Harry Potter", " The Hobbit"],
+            adventure: ["Gladiator ", "Avatar", "Interstellar"]
         } },
         currentTables: state.filterTables.currentTables,
         currentCells: state.filterCells.currentCells,
