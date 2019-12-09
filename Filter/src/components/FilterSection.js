@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
 import SearchSection from "./SearchSection";
-import OrderSection from "./OrderSection";
 import isHasFilters from "../isHasFiltersFunction";
 import arrowPng from "../img/arow.png";
 import arrowRotatePng from "../img/arowTranform.png";
@@ -43,32 +42,26 @@ export default function FilterSection({ changeResult, currentElements }) {
     return (
         <>
             <SearchSection sortFilters={currentElements} searchByName={changeFiltersList} />
-            <OrderSection filtersList={currentElements} sortFilters={changeFiltersList} />
-
-            <div className="contexts-box">
+            <div className="contexts-block">
                 {isShowList
                     ? (
-                        <>
-                            <span className="contexts-box__open-button" onClick={showList}>
+                        <div className="contexts-box">
+                            <div className="contexts-box__title" onClick={showList}>
                                 <img className="arow-button" alt="arrow" src={arrowRotatePng} />
-                            </span>
-                            <div className="contexts-box__title">
-                                        Elements
-                                <div className="conditionsForRilter">
-                                    {currentElements ? isUseSearch() : null}
-                                </div>
+                                Elements
                             </div>
-                        </>
+                            <div className="conditions-for-filter">
+                                {currentElements ? isUseSearch() : null}
+                            </div>
+                        </div>
                     )
                     : (
-                        <>
-                            <span className="contexts-box__open-button" onClick={showList}>
+                        <div className="contexts-box">
+                            <div className="contexts-box__title" onClick={showList}>
                                 <img className="arow-button" alt="arrow" src={arrowPng} />
-                            </span>
-                            <div className="contexts-box__title">
                                     Elements
                             </div>
-                        </>
+                        </div>
                     )}
             </div>
         </>
