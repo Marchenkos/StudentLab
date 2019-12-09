@@ -29,17 +29,26 @@ export default function FiltersList({ changeContext, currentContext, title }) {
 
     return (
         <div className="contexts-box">
-            <span className="contexts-box__open-button" onClick={showList}>
-                {isShowList
-                    ? <img className="arow-button" alt="arrow" src={arrowRotatePng} />
-                    : <img className="arow-button" alt="arrow" src={arrowPng} />}
-            </span>
-            <div className="contexts-box__title">
-                {title}
-                <div className="conditionsForRilter">
-                    {isShowList ? isHasFilters(listOfFilters, chooseFilter) : null}
-                </div>
-            </div>
+            {isShowList
+                ? (
+                    <>
+                        <span className="contexts-box__open-button" onClick={showList}>
+                            <img className="arow-button" alt="arrow" src={arrowRotatePng} />
+                            {title}
+                        </span>
+                        <div className="conditions-for-filter">
+                            {isShowList ? isHasFilters(listOfFilters, chooseFilter) : null}
+                        </div>
+                    </>
+                )
+                : (
+                    <>
+                        <span className="contexts-box__open-button" onClick={showList}>
+                            <img className="arow-button" alt="arrow" src={arrowPng} />
+                            {title}
+                        </span>
+                    </>
+                )}
         </div>
     );
 }

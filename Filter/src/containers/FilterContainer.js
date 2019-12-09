@@ -18,7 +18,7 @@ const mapStateToProps = state => {
         films: {
             comedy: ["The Hot Chick", "Dumb and Dumber", "Bean"],
             horror: ["Aliens", "Room 237", "Dracula"],
-            fantasy: [" Harry Potter", " The Hobbit"],
+            fantasy: ["Harry Potter", "The Hobbit"],
             adventure: ["Gladiator ", "Avatar", "Interstellar"]
         } },
         currentTables: state.filterTables.currentTables,

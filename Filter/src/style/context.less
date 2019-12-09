@@ -1,19 +1,27 @@
 .contexts-box {
     display: flex;
+    flex-direction: column;
 
     .contexts-box__open-button {
         margin-right: 10px;
-        height: 10px;
     }
 }
 
-.conditionsForRilter {
+.conditions-for-filter {
     display: flex;
     font-size: 15px;
+    max-height: 200px;
+    overflow: scroll;
     text-transform: capitalize;
     flex-direction: column;
+    overflow-x:hidden;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }
 
 .checkboxField {
-    margin: 10px;
+    margin: 20px 0 0;
 }
