@@ -4,7 +4,7 @@ import filterCells from "./filterCellReducer";
 import filterTables from "./filterTableReducer";
 
 export default combineReducers({
-    filterEements,
+    filterTables,
     filterCells,
-    filterTables
+    filterEements
 });

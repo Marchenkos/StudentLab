@@ -1,28 +1,47 @@
-let list = [];
+import React from "react";
+import ReactDOM from "react-dom";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import rootReducer from "./reducers/rootReducer";
+import App from "./App";
+
 let selectElement = document.querySelector(".listOfSavedFilters");
-let initialValue = {
-    currentTables: [],
-    currentCells: [],
-    result: []
-};
+let list = [{
+    filterTables: { currentTables: [] },
+    filterCells: { currentCells: [] },
+    filterEements: { result: [] }
+}];
+
+function loadNewFilterState() {
+    let currentValue = list[selectElement.value - 1];
+    let store = createStore(rootReducer, currentValue);
+
+    ReactDOM.render(
+        <Provider store={store}>
+            <App />
+        </Provider>,
+        document.getElementById("root")
+    );
+}
 
 function createTable(data) {
     let table = document.createElement("table");
-
     table.classList.add("savedFilter");
     let listOfSavedFilters = document.querySelector(".savedFilterState");
 
     for (let value in data) {
-        let tr = document.createElement("tr");
-        let tdHeader = document.createElement("td");
-        let tdValue = document.createElement("td");
+        for (let element in data[value]) {
+            let tr = document.createElement("tr");
+            let tdHeader = document.createElement("td");
+            let tdValue = document.createElement("td");
 
-        tdHeader.innerHTML = value;
-        tdValue.innerHTML = data[value];
+            tdHeader.innerHTML = element;
+            tdValue.innerHTML = data[value][element];
 
-        tr.appendChild(tdHeader);
-        tr.appendChild(tdValue);
-        table.appendChild(tr);
+            tr.appendChild(tdHeader);
+            tr.appendChild(tdValue);
+            table.appendChild(tr);
+        }
     }
 
     listOfSavedFilters.appendChild(table);
@@ -32,12 +51,11 @@ function saveFilter() {
     const allFilters = document.querySelectorAll(".contexts-box");
 
     let filterResult = {
-        currentTables: [],
-        currentCells: [],
-        result: []
+        filterTables: {},
+        filterCells: {},
+        filterEements: {}
     };
 
-    // eslint-disable-next-line no-plusplus
     for (let i = 0; i < allFilters.length; i++) {
         const filterSection = allFilters[i].getElementsByTagName("input");
         let checkedFilters = [];
@@ -50,17 +68,17 @@ function saveFilter() {
 
         switch (i) {
         case 0: {
-            filterResult.currentTables = checkedFilters;
+            filterResult.filterTables = { currentTables: checkedFilters };
 
             break;
         }
         case 1: {
-            filterResult.currentCells = checkedFilters;
+            filterResult.filterCells = { currentCells: checkedFilters };
 
             break;
         }
         case 2: {
-            filterResult.result = checkedFilters;
+            filterResult.filterEements = { result: checkedFilters };
 
             break;
         }
@@ -71,18 +89,15 @@ function saveFilter() {
 
     createTable(filterResult);
     list.push(filterResult);
+
     let option = document.createElement("option");
+    option.innerHTML = `State ${list.length}`;
     option.setAttribute("value", list.length);
     selectElement.appendChild(option);
-}
-
-function loadFilter() {
-    initialValue = list[selectElement.value - 1];
-    console.log(initialValue);
 }
 
 let saveButton = document.querySelector(".saveButton");
 saveButton.addEventListener("click", saveFilter);
 
 const loadButton = document.querySelector(".loadButton");
-loadButton.addEventListener("click", loadFilter);
+loadButton.addEventListener("click", loadNewFilterState);
