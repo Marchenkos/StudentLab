@@ -5,19 +5,19 @@ export const defaultState = {
     currentTables: []
 };
 
-export default function filterTables(state = defaultState, action) {
+export default function filterTables(initialState = defaultState, action) {
     switch (action.type) {
     case CHECKED_TABLE:
         return {
-            ...state,
-            currentTables: [...state.currentTables, action.checkedTable]
+            ...initialState,
+            currentTables: [...initialState.currentTables, action.checkedTable]
         };
     case UNCHECKED_TABLE:
         return {
-            ...state,
-            currentTables: state.currentTables.filter(tableName => tableName !== action.uncheckedTable)
+            ...initialState,
+            currentTables: initialState.currentTables.filter(tableName => tableName !== action.uncheckedTable)
         };
     default:
-        return state;
+        return initialState;
     }
 }

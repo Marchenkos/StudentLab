@@ -5,7 +5,7 @@ import arrowPng from "../img/arow.png";
 import arrowRotatePng from "../img/arowTranform.png";
 import "../style/context.less";
 
-export default function FilterSection({ changeResult, currentElements }) {
+export default function FilterSection({ changeResult, currentElements, selectedFilters }) {
     const [isShowList, setShowList] = useState(false);
     const [isFiltersList, setisFiltersList] = useState(null);
     let [, setState] = useState();
@@ -21,8 +21,8 @@ export default function FilterSection({ changeResult, currentElements }) {
     const isUseSearch = () => {
         if (isFiltersList != null) {
             return isFiltersList.length > 0
-                ? isHasFilters(isFiltersList, chooseElements)
-                : isHasFilters(currentElements, chooseElements);
+                ? isHasFilters(isFiltersList, chooseElements, selectedFilters)
+                : isHasFilters(currentElements, chooseElements, selectedFilters);
         } else {
             return (
                 <div>Nothing search</div>

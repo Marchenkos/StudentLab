@@ -4,7 +4,7 @@ import arrowPng from "../img/arow.png";
 import arrowRotatePng from "../img/arowTranform.png";
 import "../style/context.less";
 
-export default function FiltersList({ changeContext, currentContext, title }) {
+export default function FiltersList({ changeContext, currentContext, selectedContext, title }) {
     const [isShowList, setShowList] = useState(false);
     const [listOfFilters, setlistOfFilters] = useState([]);
 
@@ -37,7 +37,7 @@ export default function FiltersList({ changeContext, currentContext, title }) {
                             {title}
                         </span>
                         <div className="conditions-for-filter">
-                            {isShowList ? isHasFilters(listOfFilters, chooseFilter) : null}
+                            {isShowList ? isHasFilters(listOfFilters, chooseFilter, selectedContext) : null}
                         </div>
                     </>
                 )

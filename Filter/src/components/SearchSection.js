@@ -35,13 +35,8 @@ export default function SearchSection({ sortFilters, searchByName }) {
                 searchByName(sortFilters);
             }
 
-            console.log(searchResult);
-
             if (searchResult.length) {
-                console.log(inAlphabet);
                 if (inAlphabet) {
-                    console.log(searchResult.sort());
-
                     searchByName(searchResult.sort());
                 } else {
                     searchByName(searchResult);
@@ -69,7 +64,8 @@ export default function SearchSection({ sortFilters, searchByName }) {
             </span>
             <input className="search_section__search-name" ref={inputElement} placeholder="Search.." onChange={searchElements} />
             <div className="search_section__search-conditions">
-                <button className="conditions__alphabet" onClick={changeOrder}>A-Z</button>
+                {inAlphabet ? <button className="conditions__alphabet conditions__alphabet--select" onClick={changeOrder}>A-Z</button>
+                    : <button className="conditions__alphabet" onClick={changeOrder}>A-Z</button>}
                 <select className="conditions__modeList" defaultValue="completeMatch" onChange={changeMode}>
                     <option value="completeMatch">**</option>
                     <option value="startWith">*_</option>

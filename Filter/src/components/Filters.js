@@ -5,9 +5,10 @@ import FilterSection from "./FilterSection";
 import filterIcon from "../img/filterIcon.png";
 import closeButton from "../img/delete-cross.png";
 import "../style/filters.less";
+import "../style/savedFiltersState.less";
 
 export default function Filters({
-    filters, currentTables, currentCells, addTable, addCell, addElement, removeTable, removeCell, removeElement }) {
+    filters, currentTables, currentCells, addTable, addCell, addElement, removeTable, removeCell, removeElement, result }) {
 
     const [cellsForFilter, setCellsForFilter] = useState({});
     const [elementsForFilter, setElementsForFilter] = useState([]);
@@ -77,11 +78,11 @@ export default function Filters({
                     </strong>
                 </div>
                 <div className="filter__conditions">
-                    <FiltersList changeContext={changeContext} currentContext={filters} title="topic" />
+                    <FiltersList changeContext={changeContext} currentContext={filters} selectedContext={currentTables} title="topic" />
                     <hr />
-                    <FiltersList changeContext={changeDimensions} currentContext={cellsForFilter} title="section" />
+                    <FiltersList changeContext={changeDimensions} currentContext={cellsForFilter} selectedContext={currentCells} title="section" />
                     <hr />
-                    <FilterSection changeResult={changeResult} currentElements={elementsForFilter} />
+                    <FilterSection changeResult={changeResult} currentElements={elementsForFilter} selectedFilters={result} />
                     <hr />
                 </div>
             </main>
