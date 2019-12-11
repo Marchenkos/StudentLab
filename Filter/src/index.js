@@ -5,13 +5,7 @@ import { Provider } from "react-redux";
 import rootReducer from "./reducers/rootReducer";
 import App from "./App";
 
-let initialState = {
-    filterTables: { currentTables: [] },
-    filterCells: { currentCells: [] },
-    filterEements: { result: [] }
-};
-
-let store = createStore(rootReducer, initialState);
+const store = createStore(rootReducer);
 
 ReactDOM.render(
     <Provider store={store}>

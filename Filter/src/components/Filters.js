@@ -5,7 +5,6 @@ import FilterSection from "./FilterSection";
 import filterIcon from "../img/filterIcon.png";
 import closeButton from "../img/delete-cross.png";
 import "../style/filters.less";
-import "../style/savedFiltersState.less";
 
 export default function Filters({
     filters, currentTables, currentCells, addTable, addCell, addElement, removeTable, removeCell, removeElement, result }) {
@@ -24,6 +23,12 @@ export default function Filters({
             }
         }
 
+        for (const cell of currentCells) {
+            if (!newCellsForFilter.hasOwnProperty(cell)) {
+                removeCell(cell);
+            }
+        }
+
         setCellsForFilter(newCellsForFilter);
     }, [currentTables]);
 
@@ -35,6 +40,12 @@ export default function Filters({
                 for (const element of cellsForFilter[cell]) {
                     newElementsForFilter.push(element);
                 }
+            }
+        }
+
+        for (const element of result) {
+            if (!newElementsForFilter.includes(element)) {
+                removeElement(element);
             }
         }
 
