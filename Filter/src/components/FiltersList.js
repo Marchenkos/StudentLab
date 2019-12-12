@@ -32,21 +32,36 @@ export default function FiltersList({ changeContext, currentContext, selectedCon
             {isShowList
                 ? (
                     <>
-                        <span className="contexts-box__open-button" onClick={showList}>
+                        <div className="contexts-box__open-button" onClick={showList}>
                             <img className="arow-button" alt="arrow" src={arrowRotatePng} />
-                            {title}
-                        </span>
-                        <div className="conditions-for-filter">
+                            <span className="section-title">{title}</span>
+                            {selectedContext ? (
+                                <span className="selectedFilters">
+                                    {selectedContext.map(item => (item != selectedContext[selectedContext.length - 1]
+                                        ? `${item}, `
+                                        : `${item}`))}
+                                </span>
+                            ) : null}
+                        </div>
+                        <hr className="section-top-border" />
+                        <div className="contexts-box__conditions-for-filter">
                             {isShowList ? isHasFilters(listOfFilters, chooseFilter, selectedContext) : null}
                         </div>
                     </>
                 )
                 : (
                     <>
-                        <span className="contexts-box__open-button" onClick={showList}>
+                        <div className="contexts-box__open-button" onClick={showList}>
                             <img className="arow-button" alt="arrow" src={arrowPng} />
-                            {title}
-                        </span>
+                            <span className="section-title">{title}</span>
+                            {selectedContext ? (
+                                <span className="selectedFilters">
+                                    {selectedContext.map(item => (item != selectedContext[selectedContext.length - 1]
+                                        ? `${item}, `
+                                        : `${item}`))}
+                                </span>
+                            ) : null}
+                        </div>
                     </>
                 )}
         </div>
