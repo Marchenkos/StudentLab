@@ -8,14 +8,6 @@ export default function FiltersList({ changeContext, currentContext, selectedCon
     const [isShowList, setShowList] = useState(false);
     const [listOfFilters, setlistOfFilters] = useState([]);
 
-    const chooseFilter = useCallback(e => {
-        changeContext(e.target.value, e.target.checked);
-    }, []);
-
-    const showList = () => {
-        setShowList(!isShowList);
-    };
-
     useEffect(() => {
         const list = [];
 
@@ -26,6 +18,13 @@ export default function FiltersList({ changeContext, currentContext, selectedCon
         setlistOfFilters(list);
     }, [currentContext]);
 
+    const chooseFilter = useCallback(e => {
+        changeContext(e.target.value, e.target.checked);
+    }, []);
+
+    const showList = () => {
+        setShowList(!isShowList);
+    };
 
     return (
         <div className="contexts-box">

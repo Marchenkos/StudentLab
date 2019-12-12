@@ -37,7 +37,6 @@ export default function Filters({
 
         for (const cell in cellsForFilter) {
             if (currentCells.includes(cell)) {
-                console.log(cellsForFilter[cell], cell, cellsForFilter);
                 for (const element of cellsForFilter[cell]) {
                     newElementsForFilter.push(element);
                 }
