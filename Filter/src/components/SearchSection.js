@@ -64,13 +64,13 @@ export default function SearchSection({ sortFilters, searchByName }) {
             </span>
             <input className="search_section__search-name" ref={inputElement} placeholder="Search.." onChange={searchElements} />
             <div className="search_section__search-conditions">
+                <select className="conditions__modeList" defaultValue="completeMatch" onChange={changeMode}>
+                    <option className="modeList__item" value="completeMatch">**</option>
+                    <option className="modeList__item" value="startWith">*_</option>
+                    <option className="modeList__item" value="partialeMatch">*_*_</option>
+                </select>
                 {inAlphabet ? <button className="conditions__alphabet conditions__alphabet--select" onClick={changeOrder}>A-Z</button>
                     : <button className="conditions__alphabet" onClick={changeOrder}>A-Z</button>}
-                <select className="conditions__modeList" defaultValue="completeMatch" onChange={changeMode}>
-                    <option value="completeMatch">**</option>
-                    <option value="startWith">*_</option>
-                    <option value="partialeMatch">*_*_</option>
-                </select>
             </div>
         </div>
     );

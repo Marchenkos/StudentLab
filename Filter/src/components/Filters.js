@@ -37,6 +37,7 @@ export default function Filters({
 
         for (const cell in cellsForFilter) {
             if (currentCells.includes(cell)) {
+                console.log(cellsForFilter[cell], cell, cellsForFilter);
                 for (const element of cellsForFilter[cell]) {
                     newElementsForFilter.push(element);
                 }
@@ -77,24 +78,24 @@ export default function Filters({
     };
 
     return (
-        <Draggable handle="strong">
+        <Draggable handle="article">
             <main className="filter">
-                <div className="filter__title">
-                    <span className="title-block__icon">
+                <article className="filter__title">
+                    <div className="title-block__icon">
                         <img className="filter-icon" alt="arrow" src={filterIcon} />
-                    </span>
+                    </div>
                     <span className="title-block__name">filters</span>
-                    <strong className="title-block__close-button">
+                    <div className="title-block__close-button">
                         <img className="close-button" alt="arrow" src={closeButton} />
-                    </strong>
-                </div>
+                    </div>
+                </article>
                 <div className="filter__conditions">
                     <FiltersList changeContext={changeContext} currentContext={filters} selectedContext={currentTables} title="topic" />
-                    <hr />
+                    <hr className="section_separator" />
                     <FiltersList changeContext={changeDimensions} currentContext={cellsForFilter} selectedContext={currentCells} title="section" />
-                    <hr />
+                    <hr className="section_separator" />
                     <FilterSection changeResult={changeResult} currentElements={elementsForFilter} selectedFilters={result} />
-                    <hr />
+                    <hr className="section_separator" />
                 </div>
             </main>
         </Draggable>
