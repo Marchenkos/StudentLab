@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Draggable from "react-draggable";
-import FiltersList from "./FiltersList";
 import FilterSection from "./FilterSection";
-import filterIcon from "../img/filterIcon.png";
-import closeButton from "../img/delete-cross.png";
+import TitleForFilter from "./TitleForFilter";
+import FiltersList from "./FilterList";
+
 import "../style/filters.less";
 
 export default function Filters({
@@ -52,48 +52,40 @@ export default function Filters({
         setElementsForFilter(newElementsForFilter);
     }, [currentCells]);
 
-    const changeContext = (tableName, condition) => {
+    const changeContext = useCallback((tableName, condition) => {
         if (condition) {
             addTable(tableName);
         } else {
             removeTable(tableName);
         }
-    };
+    }, []);
 
-    const changeResult = (elementName, condition) => {
+    const changeResult = useCallback((elementName, condition) => {
         if (condition) {
             addElement(elementName);
         } else {
             removeElement(elementName);
         }
-    };
+    }, []);
 
-    const changeDimensions = (cellName, condition) => {
+    const changeDimensions = useCallback((cellName, condition) => {
         if (condition) {
             addCell(cellName);
         } else {
             removeCell(cellName);
         }
-    };
+    }, []);
 
     return (
         <Draggable handle="article">
             <main className="filter">
-                <article className="filter__title">
-                    <div className="title-block__icon">
-                        <img className="filter-icon" alt="arrow" src={filterIcon} />
-                    </div>
-                    <span className="title-block__name">filters</span>
-                    <div className="title-block__close-button">
-                        <img className="close-button" alt="arrow" src={closeButton} />
-                    </div>
-                </article>
+                <TitleForFilter />
                 <div className="filter__conditions">
-                    <FiltersList changeContext={changeContext} currentContext={filters} selectedContext={currentTables} title="topic" />
+                    <FilterSection changeContext={changeContext} currentContext={filters} selectedContext={currentTables} title="topic" />
                     <hr className="section_separator" />
-                    <FiltersList changeContext={changeDimensions} currentContext={cellsForFilter} selectedContext={currentCells} title="section" />
+                    <FilterSection changeContext={changeDimensions} currentContext={cellsForFilter} selectedContext={currentCells} title="section" />
                     <hr className="section_separator" />
-                    <FilterSection changeResult={changeResult} currentElements={elementsForFilter} selectedFilters={result} />
+                    <FiltersList changeResult={changeResult} currentElements={elementsForFilter} selectedFilters={result} />
                     <hr className="section_separator" />
                 </div>
             </main>

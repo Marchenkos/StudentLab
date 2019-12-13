@@ -1,64 +1,53 @@
 import React, { useState, useCallback, useEffect } from "react";
-import SearchSection from "./SearchSection";
-import isHasFilters from "../isHasFiltersFunction";
+import CheckboxList from "./СheckboxList";
+import TitleForFilterSections from "./TitleForFilterSections";
 import arrowPng from "../img/arow.png";
 import arrowRotatePng from "../img/arowTranform.png";
 import "../style/context.less";
 
-export default function FilterSection({ changeResult, currentElements, selectedFilters }) {
-    const [isFiltersList, setisFiltersList] = useState(null);
-    let [, setState] = useState();
+export default function FilterSection({ changeContext, currentContext, selectedContext, title }) {
+    const [isShowList, setShowList] = useState(false);
+    const [listOfFilters, setlistOfFilters] = useState([]);
 
     useEffect(() => {
-        setisFiltersList(currentElements);
-    }, [currentElements]);
+        const list = [];
 
-    const chooseElements = useCallback(e => {
-        changeResult(e.target.value, e.target.checked);
+        for (const cell in currentContext) {
+            list.push(cell);
+        }
+
+        setlistOfFilters(list);
+    }, [currentContext]);
+
+    const chooseFilter = useCallback(e => {
+        changeContext(e.target.value, e.target.checked);
     }, []);
 
-    const isUseSearch = () => {
-        if (isFiltersList != null) {
-            return isFiltersList.length > 0
-                ? isHasFilters(isFiltersList, chooseElements, selectedFilters)
-                : isHasFilters(currentElements, chooseElements, selectedFilters);
-        } else {
-            return (
-                <div>Nothing search</div>
-            );
-        }
+    const showList = () => {
+        setShowList(!isShowList);
     };
-
-    const changeFiltersList = value => {
-        setisFiltersList(value);
-        setState({});
-    };
-
-    const selectAllFilters = useCallback(e => {
-        for (const filter of currentElements) {
-            changeResult(filter, e.target.checked);
-        }
-    }, [currentElements]);
 
     return (
-        <>
-            <SearchSection sortFilters={currentElements} searchByName={changeFiltersList} />
-            <div className="contexts-block">
-                <div className="contexts-box">
-                    <hr className="contexts-box__result-separator" />
-                    {currentElements.length
-                        ? (
-                            <div className="contexts-box__result">
-                                <p className="checkboxField checkboxField--all-filters">
-                                    <input type="checkbox" onChange={selectAllFilters} />
-                                    (All)
-                                </p>
-                                {isUseSearch()}
-                            </div>
-                        )
-                        : null }
-                </div>
-            </div>
-        </>
+        <div className="contexts-box">
+            {isShowList
+                ? (
+                    <>
+                        <div className="contexts-box__open-button" onClick={showList}>
+                            <TitleForFilterSections selectedContext={selectedContext} arrowImg={arrowRotatePng} title={title} />
+                        </div>
+                        <hr className="section-top-border" />
+                        <div className="contexts-box__conditions-for-filter">
+                            {isShowList
+                                ? <CheckboxList filter={listOfFilters} eventListener={chooseFilter} selectedContext={selectedContext} />
+                                : null}
+                        </div>
+                    </>
+                )
+                : (
+                    <div className="contexts-box__open-button" onClick={showList}>
+                        <TitleForFilterSections selectedContext={selectedContext} arrowImg={arrowPng} title={title} />
+                    </div>
+                )}
+        </div>
     );
 }

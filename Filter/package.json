@@ -1,7 +1,6 @@
 {
-    "name": "youtube_videos_search",
+    "name": "filter",
     "version": "1.0.0",
-    "description": "A web app to view information about Youtube videos.",
     "main": "index.js",
     "scripts": {
         "test": "jest",
@@ -12,14 +11,11 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Marchenkos/YouTube_Videos_Search.git"
+        "url": "git+https://github.com/Marchenkos/StudentLab.git"
     },
     "author": "",
     "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/Marchenkos/YouTube_Videos_Search/issues"
-    },
-    "homepage": "https://github.com/Marchenkos/YouTube_Videos_Search#readme",
+    "homepage": "https://github.com/Marchenkos/StudentLab#readme",
     "dependencies": {
         "@testing-library/react-hooks": "^3.2.1",
         "enzyme": "^3.10.0",
@@ -37,8 +33,7 @@
         "react-draggable": "^4.2.0",
         "react-redux": "^7.1.1",
         "redux": "^4.0.4",
-        "redux-devtools-extension": "^2.13.8",
-        "redux-thunk": "^2.3.0"
+        "redux-devtools-extension": "^2.13.8"
     },
     "devDependencies": {
         "@babel/cli": "^7.7.5",

@@ -1,19 +1,18 @@
 import React, { useState, useCallback } from "react";
+import SavedFilterList from "./SavedFilterList";
 
 export default function ManageBlock({ currentTables, currentCells, result, loadSavedStatus }) {
     const [listOfState, setListOfState] = useState([]);
-    const [selectedState, setSelectedState] = useState(0);
+    const [selectedStates, setSelectedStates] = useState(0);
+
+    const selectState = useCallback(e => setSelectedStates(e.target.value), []);
 
     const loadState = useCallback(() => {
         if (listOfState.length > 0) {
-            const { savedTables, savedCells, savedElements } = listOfState[Number(selectedState)];
+            const { savedTables, savedCells, savedElements } = listOfState[Number(selectedStates)];
             loadSavedStatus(savedTables, savedCells, savedElements);
         }
-    }, [selectedState]);
-
-    const selectState = useCallback(e => {
-        setSelectedState(e.target.value);
-    }, []);
+    }, [selectedStates]);
 
     const saveState = useCallback(e => {
         let newState = {
@@ -31,12 +30,7 @@ export default function ManageBlock({ currentTables, currentCells, result, loadS
             <button className="manage-block__saveButton" onClick={saveState}>Save</button>
             {listOfState.length == 0 ? null
                 : (
-                    <select className="manage-block__listOfSavedFilters" onChange={selectState}>
-                        {
-                            listOfState.map((name, index) => (
-                                <option key={index} value={index}>{`State ${index + 1}`}</option>))
-                        }
-                    </select>
+                    <SavedFilterList selectItem={selectState} list={listOfState} />
                 )}
         </div>
     );

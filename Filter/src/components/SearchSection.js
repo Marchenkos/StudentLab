@@ -1,42 +1,40 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import search from "../img/search.png";
 import "../style/search-section.less";
 
 export default function SearchSection({ sortFilters, searchByName }) {
+    const completeMatch = "completeMatch";
+    const startWith = "startWith";
+    const partialeMatch = "partialeMatch";
     const inputElement = useRef(null);
     const [selectedMode, setSelectedMode] = useState("completeMatch");
-    const [inAlphabet, setInAlphabet] = useState(false);
+    const [isCheckCase, setIsCheckCase] = useState(false);
+
+    const changeMode = e => setSelectedMode(e.target.value);
+    const changeOrder = () => setIsCheckCase(!isCheckCase);
 
     const searchElements = useCallback(e => {
         let searchResult = [];
         const condition = inputElement.current.value;
+        const modeToFilter = {
+            [completeMatch]: filters => filters.filter(element => element.toLowerCase() === condition.toLowerCase()),
+            [startWith]: filters => filters.filter(name => name.toLowerCase().startsWith(condition.toLowerCase())),
+            [partialeMatch]: filters => filters.filter(name => name.toLowerCase().includes(condition.toLowerCase()))
+        };
+
         e.preventDefault();
 
-        if (condition.length > 0) {
-            switch (selectedMode) {
-            case "completeMatch": {
-                if (sortFilters.includes(condition)) {
-                    searchResult = sortFilters.filter(el => el == condition);
-                }
+        console.log(condition);
 
-                break;
-            }
-            case "startWith": {
-                searchResult = sortFilters.filter(name => name.toLowerCase().startsWith(condition.toLowerCase()));
+        if (condition && condition.length > 0) {
+            searchResult = modeToFilter[selectedMode](sortFilters);
 
-                break;
-            }
-            case "partialeMatch": {
-                searchResult = sortFilters.filter(name => name.toLowerCase().includes(condition.toLowerCase()));
-
-                break;
-            }
-            default:
+            if (searchResult.length == 0) {
                 searchByName(sortFilters);
             }
 
             if (searchResult.length) {
-                if (inAlphabet) {
+                if (isCheckCase) {
                     searchByName(searchResult.sort());
                 } else {
                     searchByName(searchResult);
@@ -47,15 +45,7 @@ export default function SearchSection({ sortFilters, searchByName }) {
         } else {
             searchByName(condition);
         }
-    }, [sortFilters, selectedMode, inAlphabet]);
-
-    const changeMode = e => {
-        setSelectedMode(e.target.value);
-    };
-
-    const changeOrder = () => {
-        setInAlphabet(!inAlphabet);
-    };
+    }, [sortFilters, selectedMode, isCheckCase]);
 
     return (
         <div className="search-section">
@@ -64,12 +54,12 @@ export default function SearchSection({ sortFilters, searchByName }) {
             </span>
             <input className="search_section__search-name" ref={inputElement} placeholder="Search.." onChange={searchElements} />
             <div className="search_section__search-conditions">
-                <select className="conditions__modeList" defaultValue="completeMatch" onChange={changeMode}>
+                <select className="conditions__modeList" onChange={changeMode}>
                     <option className="modeList__item" value="completeMatch">**</option>
                     <option className="modeList__item" value="startWith">*_</option>
                     <option className="modeList__item" value="partialeMatch">*_*_</option>
                 </select>
-                {inAlphabet ? <button className="conditions__alphabet conditions__alphabet--select" onClick={changeOrder}>A-Z</button>
+                {isCheckCase ? <button className="conditions__alphabet conditions__alphabet--select" onClick={changeOrder}>A-Z</button>
                     : <button className="conditions__alphabet" onClick={changeOrder}>A-Z</button>}
             </div>
         </div>
