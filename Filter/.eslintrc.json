@@ -39,6 +39,7 @@
         "semi-spacing": ["error", {"before": false, "after": true}],
         "quotes": ["error", "double"],
         "indent":["error", 4],
+        "no-useless-computed-key":"off",
         "no-unused-vars": "off",
         "padded-blocks":"off",
         "eqeqeq": "off",
