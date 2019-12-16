@@ -24,8 +24,6 @@ export default function SearchSection({ sortFilters, searchByName }) {
 
         e.preventDefault();
 
-        console.log(condition);
-
         if (condition && condition.length > 0) {
             searchResult = modeToFilter[selectedMode](sortFilters);
 
