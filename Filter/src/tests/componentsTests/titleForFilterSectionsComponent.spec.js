@@ -5,7 +5,7 @@ import TitleForFilterSections from "../../components/TitleForFilterSections";
 
 const { describe, it, expect } = global;
 
-describe("Test for component, which renders title for section", () => {
+describe("Test for component which renders title for section", () => {
     const props = {
         selectedContext: [],
         arrowImg: "img.png",

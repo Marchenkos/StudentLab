@@ -4,7 +4,7 @@ import TitleForFilter from "../../components/TitleForFilter";
 
 const { describe, it, expect } = global;
 
-describe("Test for component, which renders main title", () => {
+describe("Test for component which renders main title", () => {
     const wrapper = shallow(<TitleForFilter />);
     const block = wrapper.find("article");
 

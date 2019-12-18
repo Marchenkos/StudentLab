@@ -4,7 +4,7 @@ import SelectedFilterList from "../../components/SelectedFilterList";
 
 const { describe, it, expect } = global;
 
-describe("Test for component, which renders names of selected filters", () => {
+describe("Test for component which renders names of selected filters", () => {
     it("Component renders names if selectedFilter isn't empty", () => {
         const props = {
             selectedFilter: ["one", "two", "three"]

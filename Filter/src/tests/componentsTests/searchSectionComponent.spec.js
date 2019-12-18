@@ -36,5 +36,4 @@ describe("Test for component, which renders elements for search filters", () => 
     it("Component renders button for changing the mode", () => {
         expect(block.find(".conditions__alphabet").text()).toBe("A-Z");
     });
-
 });

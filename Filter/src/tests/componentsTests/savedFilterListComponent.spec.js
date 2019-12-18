@@ -3,7 +3,8 @@ import { shallow } from "enzyme";
 import SavedFilterList from "../../components/SavedFilterList";
 
 const { describe, it, expect } = global;
-describe("Test for component, that contains saved filter states", () => {
+
+describe("Test for component that contains saved filter states", () => {
     it("Component renders of drop-down list items", () => {
         const props = {
             list: ["one", "two", "three"],

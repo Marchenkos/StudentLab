@@ -4,7 +4,7 @@ import FilterList from "../../components/FilterList";
 
 const { describe, it, expect } = global;
 
-describe("Test for component, which renders filter result", () => {
+describe("Test for component which renders filter result", () => {
     it("Component renders filter section", () => {
         [{ filters: ["one", "two", "three"], expectedResult: 1 },
             { filters: ["one", "three"], expectedResult: 1 },

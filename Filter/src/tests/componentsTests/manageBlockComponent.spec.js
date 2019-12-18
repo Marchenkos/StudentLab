@@ -5,7 +5,7 @@ import SavedFilterList from "../../components/SavedFilterList";
 
 const { describe, it, expect } = global;
 
-describe("Test for component, which contains controls for saving filter states", () => {
+describe("Test for component which contains controls for saving filter states", () => {
     const props = {
         currentTables: [],
         currentCells: [],

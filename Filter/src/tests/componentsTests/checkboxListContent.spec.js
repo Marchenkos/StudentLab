@@ -5,7 +5,7 @@ import CheckboxList from "../../components/СheckboxList";
 const { describe, it, expect } = global;
 const filters = ["Three Days Grace", "Linkin Park", "AC/DC"];
 
-describe("Test for component, which renders checkboxes for each filter", () => {
+describe("Test for component which renders checkboxes for each filter", () => {
     it("Component renders checkboxes if property 'filter' isn't empty", () => {
         const props = {
             filter: filters,

@@ -7,7 +7,7 @@ import TitleForFilter from "../../components/TitleForFilter";
 
 const { describe, it, expect } = global;
 
-describe("Test for main component, which renders all filter sections", () => {
+describe("Test for main component which renders all filter sections", () => {
     const props = {
         filters: {},
         currentTables: [],

@@ -6,7 +6,7 @@ import TitleForFilterSections from "../../components/TitleForFilterSections";
 
 const { describe, it, expect } = global;
 
-describe("Test for component, which renders filter section", () => {
+describe("Test for component which renders filter section", () => {
     const props = {
         currentContext: {},
         title: "Filters",
@@ -19,7 +19,7 @@ describe("Test for component, which renders filter section", () => {
         expect(wrapper.find(TitleForFilterSections).length).toEqual(1);
     });
 
-    it("Component shows the filters, after clicking on the button", () => {
+    it("Component shows the filters after clicking on the button", () => {
         const button = wrapper.find(".contexts-box__open-button");
         expect(wrapper.find(CheckboxList).length).toBe(0);
 
