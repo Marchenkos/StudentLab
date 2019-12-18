@@ -5,7 +5,7 @@ import TitleForFilterSections from "../../components/TitleForFilterSections";
 
 const { describe, it, expect } = global;
 
-describe("Component that render title for sections", () => {
+describe("Test for component, which renders title for section", () => {
     const props = {
         selectedContext: [],
         arrowImg: "img.png",
@@ -13,12 +13,17 @@ describe("Component that render title for sections", () => {
     };
     const wrapper = shallow(<TitleForFilterSections {...props} />);
 
-    it("Render three children", () => {
-        const { title, arrowImg, selectedContext } = props;
+    it("Component renders title for filter section", () => {
+        expect(wrapper.find(".section-title").length).toBe(1);
+        expect(wrapper.find(".section-title").text()).toBe(props.title);
+    });
 
-        expect(wrapper.find("img").length).toBe(1);
-        expect(wrapper.find("img").prop("src")).toBe(arrowImg);
-        expect(wrapper.find("span").text()).toBe(title);
-        expect(wrapper.find(SelectedFilterList).prop("selectedFilter")).toEqual(selectedContext);
+    it("Component renders one icon", () => {
+        expect(wrapper.find(".arow-button").length).toBe(1);
+        expect(wrapper.find(".arow-button").prop("src")).toBe(props.arrowImg);
+    });
+
+    it("Component renders SelectedFilterList component if 'selectedContext' passed", () => {
+        expect(wrapper.find(SelectedFilterList).length).toEqual(1);
     });
 });

@@ -6,7 +6,7 @@ export default function SavedFilterList({ selectItem, list }) {
         <select className="manage-block__listOfSavedFilters" onChange={selectItem}>
             {
                 list.map((name, index) => (
-                    <option key={index} value={index}>{`State ${index + 1}`}</option>
+                    <option className="filters__item" key={index} value={index}>{`State ${index + 1}`}</option>
                 ))
             }
         </select>

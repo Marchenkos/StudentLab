@@ -5,7 +5,7 @@ import SavedFilterList from "../../components/SavedFilterList";
 
 const { describe, it, expect } = global;
 
-describe("Component that contain management to save filter states", () => {
+describe("Test for component, which contains controls for saving filter states", () => {
     const props = {
         currentTables: [],
         currentCells: [],
@@ -14,13 +14,13 @@ describe("Component that contain management to save filter states", () => {
     };
     const wrapper = shallow(<ManageBlock {...props} />);
 
-    it("Render two buttons", () => {
+    it("Component renders two buttons", () => {
         expect(wrapper.find("button").length).toBe(2);
         expect(wrapper.find(".manage-block__loadButton").text()).toBe("Load");
         expect(wrapper.find(".manage-block__saveButton").text()).toBe("Save");
     });
 
-    it("Render SavedFilterList component after click on the second button", () => {
+    it("Component renders SavedFilterList component after clicking on the button", () => {
         const saveButton = wrapper.find(".manage-block__saveButton");
 
         saveButton.simulate("click");

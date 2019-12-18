@@ -4,16 +4,18 @@ import TitleForFilter from "../../components/TitleForFilter";
 
 const { describe, it, expect } = global;
 
-describe("Component that render main title for filter", () => {
+describe("Test for component, which renders main title", () => {
     const wrapper = shallow(<TitleForFilter />);
+    const block = wrapper.find("article");
 
-    it("Render three children: title and two img", () => {
-        const block = wrapper.find("article");
+    it("Component renders title for filter", () => {
         const expectedTitle = "filters";
 
-        expect(block.children().length).toBe(3);
-        expect(block.find("img").length).toBe(2);
         expect(block.find("span").length).toBe(1);
         expect(block.find("span").text()).toEqual(expectedTitle);
+    });
+
+    it("Component renders two icons", () => {
+        expect(block.find("img").length).toBe(2);
     });
 });

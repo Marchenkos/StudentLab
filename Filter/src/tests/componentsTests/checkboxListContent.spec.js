@@ -5,21 +5,22 @@ import CheckboxList from "../../components/СheckboxList";
 const { describe, it, expect } = global;
 const filters = ["Three Days Grace", "Linkin Park", "AC/DC"];
 
-describe("Component that checkbox for each filter", () => {
-    it("Render list of filters", () => {
+describe("Test for component, which renders checkboxes for each filter", () => {
+    it("Component renders checkboxes if property 'filter' isn't empty", () => {
         const props = {
             filter: filters,
             selectedContext: [],
             eventListener: () => {}
         };
         const wrapper = shallow(<CheckboxList {...props} />);
-        const { filter, eventListener } = props;
 
-        expect(wrapper.find("input").length).toEqual(Object.keys(filter).length);
-        expect(wrapper.find("input").first().prop("onChange")).toEqual(eventListener);
+        expect(wrapper.find("input").length).toEqual(Object.keys(props.filter).length);
+        wrapper.find("input").forEach(child => {
+            expect(child.prop("type")).toEqual("checkbox");
+        });
     });
 
-    it("Render one child if filters is empty", () => {
+    it("Component renders one child element if property 'filter' is empty", () => {
         const props = {
             filter: [],
             selectedContext: [],
@@ -28,6 +29,6 @@ describe("Component that checkbox for each filter", () => {
         const wrapper = shallow(<CheckboxList {...props} />);
 
         expect(wrapper.children().length).toEqual(1);
-        expect(wrapper.find("div").text()).toEqual("Select filters above");
+        expect(wrapper.find(".emptyBlock").text()).toEqual("Select filters above");
     });
 });

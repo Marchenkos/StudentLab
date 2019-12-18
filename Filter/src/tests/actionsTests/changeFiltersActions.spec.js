@@ -4,8 +4,8 @@ import * as uncheckActions from "../../actions/uncheckedElements";
 
 const { describe, it, expect } = global;
 
-describe("Test action to select filter in other section", () => {
-    it("Get a checked filter in table section", () => {
+describe("Test for creating an action", () => {
+    it("CHECKED_TABLE action creates correctly", () => {
         const filterName = "films";
         const expectedAction = {
             type: checkActions.CHECKED_TABLE,
@@ -15,7 +15,7 @@ describe("Test action to select filter in other section", () => {
         expect(checkActions.checkedTable(filterName)).toEqual(expectedAction);
     });
 
-    it("Get a checked filter in cells section", () => {
+    it("CHECKED_CELL action creates correctly", () => {
         const filterName = "horror";
         const expectedAction = {
             type: checkActions.CHECKED_CELL,
@@ -25,7 +25,7 @@ describe("Test action to select filter in other section", () => {
         expect(checkActions.checkedCell(filterName)).toEqual(expectedAction);
     });
 
-    it("Get a checked filter in element section", () => {
+    it("CHECKED_ELEMENT action creates correctly", () => {
         const filterName = "Aliens";
         const expectedAction = {
             type: checkActions.CHECKED_ELEMENT,
@@ -35,7 +35,7 @@ describe("Test action to select filter in other section", () => {
         expect(checkActions.checkedElement(filterName)).toEqual(expectedAction);
     });
 
-    it("Get an unchecked filter in table section", () => {
+    it("UNCHECKED_TABLE action creates correctly", () => {
         const filterName = "films";
         const expectedAction = {
             type: uncheckActions.UNCHECKED_TABLE,
@@ -45,7 +45,7 @@ describe("Test action to select filter in other section", () => {
         expect(uncheckActions.uncheckedTable(filterName)).toEqual(expectedAction);
     });
 
-    it("Get an unchecked filter in cells section", () => {
+    it("UNCHECKED_CELL action creates correctly", () => {
         const filterName = "horror";
         const expectedAction = {
             type: uncheckActions.UNCHECKED_CELL,
@@ -55,7 +55,7 @@ describe("Test action to select filter in other section", () => {
         expect(uncheckActions.uncheckedCell(filterName)).toEqual(expectedAction);
     });
 
-    it("Get an unchecked filter in element section", () => {
+    it("UNCHECKED_ELEMENT action creates correctly", () => {
         const filterName = "Aliens";
         const expectedAction = {
             type: uncheckActions.UNCHECKED_ELEMENT,
@@ -65,7 +65,7 @@ describe("Test action to select filter in other section", () => {
         expect(uncheckActions.uncheckedElement(filterName)).toEqual(expectedAction);
     });
 
-    it("Get filters to load them into table section", () => {
+    it("LOAD_TABLES action creates correctly", () => {
         const filterName = ["music", "films"];
         const expectedAction = {
             type: loadActions.LOAD_TABLES,
@@ -75,7 +75,7 @@ describe("Test action to select filter in other section", () => {
         expect(loadActions.loadTables(filterName)).toEqual(expectedAction);
     });
 
-    it("Get filters to load them into cells section", () => {
+    it("LOAD_CELLS action creates correctly", () => {
         const filterName = ["horror", "novel"];
         const expectedAction = {
             type: loadActions.LOAD_CELLS,
@@ -85,7 +85,7 @@ describe("Test action to select filter in other section", () => {
         expect(loadActions.loadCells(filterName)).toEqual(expectedAction);
     });
 
-    it("Get filters to load them into element section", () => {
+    it("LOAD_ELEMENTS action creates correctly", () => {
         const filterName = ["The Hot Chick", "Dumb and Dumber", "Bean"];
         const expectedAction = {
             type: loadActions.LOAD_ELEMENTS,

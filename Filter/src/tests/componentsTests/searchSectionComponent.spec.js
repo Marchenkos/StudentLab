@@ -5,30 +5,36 @@ import SearchSection from "../../components/SearchSection";
 
 const { describe, it, expect } = global;
 
-describe("Component that contain elements for search filters", () => {
+describe("Test for component, which renders elements for search filters", () => {
     const props = {
         sortFilters: ["one", "two", "three"],
         searchByName: () => {}
     };
     const wrapper = shallow(<SearchSection {...props} />);
+    const block = wrapper.find(".search-section");
 
-    it("Render five child elements", () => {
-        const block = wrapper.find("div");
-
-        expect(block.children().length).toBe(5);
-        expect(block.find("select").children().length).toBe(3);
-        expect(block.find("input").length).toBe(1);
-        expect(block.find("button").length).toBe(1);
-        expect(block.find("button").text()).toBe("A-Z");
-        expect(block.find("img").length).toBe(1);
+    it("Component renders icon for search", () => {
+        expect(block.find(".search-button").length).toBe(1);
     });
 
-    it("Render one input field, img, button and select element fwith 3 children", () => {
-        const block = wrapper.find("div");
-        const buttonCase = wrapper.find(".conditions__alphabet");
-
-        buttonCase.simulate("click");
-
-        expect(block.find("button").text()).toBe("A-Z");
+    it("Component renders search string", () => {
+        expect(block.find(".search_section__search-name").length).toBe(1);
     });
+
+    it("Component renders drop-down list", () => {
+        const expectedModes = ["completeMatch", "startWith", "partialeMatch"];
+        let count = 0;
+
+        expect(block.find(".conditions__modeList").length).toBe(1);
+        expect(block.find(".conditions__modeList").children().length).toBe(3);
+        block.find(".conditions__modeList").children().forEach(child => {
+            expect(child.prop("value")).toEqual(expectedModes[count]);
+            count++;
+        });
+    });
+
+    it("Component renders button for changing the mode", () => {
+        expect(block.find(".conditions__alphabet").text()).toBe("A-Z");
+    });
+
 });
