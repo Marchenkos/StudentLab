@@ -7,7 +7,7 @@ const { describe, it, expect } = global;
 describe("Test for component which renders filter result", () => {
     it("Component renders filter section", () => {
         [{ filters: ["one", "two", "three"], expectedResult: 1 },
-            { filters: ["one", "three"], expectedResult: 1 },
+            { filters: ["one", "two"], expectedResult: 1 },
             { filters: [], expectedResult: 0 }
         ].forEach(({ filters, expectedResult }) => {
             const props = {

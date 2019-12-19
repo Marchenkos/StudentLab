@@ -19,7 +19,7 @@
     "dependencies": {
         "@testing-library/react-hooks": "^3.2.1",
         "enzyme": "^3.10.0",
-        "enzyme-adapter-react-16": "^1.15.1",
+        "enzyme-adapter-react-16": "^отак         ",
         "enzyme-to-json": "^3.4.2",
         "gapi-client": "0.0.3",
         "identity-obj-proxy": "^3.0.0",

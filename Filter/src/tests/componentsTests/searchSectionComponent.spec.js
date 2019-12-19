@@ -1,11 +1,10 @@
 import React from "react";
-import { shallow } from "enzyme";
-import search from "../../img/search.png";
+import { shallow, mount } from "enzyme";
 import SearchSection from "../../components/SearchSection";
 
 const { describe, it, expect } = global;
 
-describe("Test for component, which renders elements for search filters", () => {
+describe("Test for component which renders elements for search filters", () => {
     const props = {
         sortFilters: ["one", "two", "three"],
         searchByName: () => {}

@@ -31,4 +31,19 @@ describe("Test for component which renders checkboxes for each filter", () => {
         expect(wrapper.children().length).toEqual(1);
         expect(wrapper.find(".emptyBlock").text()).toEqual("Select filters above");
     });
+
+    it("Call the method after filter selection", () => {
+        const selectFilter = jest.fn();
+        const props = {
+            filter: ["Three Days Grace"],
+            selectedContext: [],
+            eventListener: selectFilter
+        };
+
+        const component = shallow(<CheckboxList {...props} />);
+        const button = component.find(".checkboxField__item");
+
+        button.simulate("change");
+        expect(selectFilter).toBeCalled();
+    });
 });
