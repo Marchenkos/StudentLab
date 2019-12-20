@@ -14,7 +14,7 @@ export default function ManageBlock({ currentTables, currentCells, result, loadS
         }
     }, [selectedStates]);
 
-    const saveState = useCallback(e => {
+    const saveState = useCallback(() => {
         let newState = {
             savedTables: currentTables,
             savedCells: currentCells,

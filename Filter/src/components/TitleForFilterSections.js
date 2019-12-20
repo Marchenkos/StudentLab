@@ -7,9 +7,7 @@ export default function TitleForFilterSections({ selectedContext, arrowImg, titl
         <>
             <img className="arow-button" alt="arrow" src={arrowImg} />
             <span className="section-title">{title}</span>
-            {selectedContext ? (
-                <SelectedFilterList selectedFilter={selectedContext} />
-            ) : null}
+            <SelectedFilterList selectedFilter={selectedContext} />
         </>
     );
 }

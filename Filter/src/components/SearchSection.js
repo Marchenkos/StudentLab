@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from "react";
-import search from "../img/search.png";
+import { search } from "../img/search.png";
 import "../style/search-section.less";
 
 export default function SearchSection({ sortFilters, searchByName }) {
