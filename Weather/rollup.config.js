@@ -1,24 +1,40 @@
-import resolve from "rollup-plugin-node-resolve";
-import babel from "rollup-plugin-babel";
-import less from "rollup-plugin-less";
-import image from "rollup-plugin-image";
+import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
+import babel from 'rollup-plugin-babel';
+import jsx from 'rollup-plugin-jsx';
+import html from 'rollup-plugin-bundle-html';
+import run from '@rollup/plugin-run';
 
 export default {
     input: "src/index.js",
-    output: {
-        file: "dist/bundle.js",
-        format: "cjs"
-    },
-    external: [
-        "react",
-        "react-proptypes"
+    external: ['react', 'react-dom'],
+    output:[
+        {
+            file: "dist/bundle.esm.js",
+            "format": "esm",
+            "globals": {
+                'react': 'React',
+                'react-dom': 'ReactDOM'
+            }
+        }
     ],
     plugins: [
-        resolve(),
-        babel({
-            exclude: "node_modules/**"
+        jsx( {factory: 'React.createElement'} ),
+
+        resolve({
+            browser: true
         }),
-        less(),
-        image()
+        commonjs({
+            include: "node_modules/**",
+        }),
+        babel({
+            exclude: 'node_modules/**'
+        }),
+        html({
+            template: 'src/index.html',
+            dest: "dist",
+            filename: 'index.html'
+        }),
+        run()
     ]
-};
+}

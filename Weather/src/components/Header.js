@@ -1,10 +1,6 @@
 import React from "react";
-import "../style/header-container.less";
-import "../style/logo.less";
 
 export default function Header() {
-
-
     return (
         <div className="header-container">
             <div className="logo">
