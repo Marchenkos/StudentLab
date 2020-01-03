@@ -1,19 +1,22 @@
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import Header from "../components/Header";
-import { fetchUserRequest } from "../actions/fetchWeatherAction";
+import { fetchWeatherRequest } from "../actions/fetchWeatherAction";
 import { enterCityName, changeMode } from "../actions/searchWeatherAction";
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
     return {
-        cityName: props.cityName,
+        cityName: state.cityName,
         mode: state.mode,
         result: state.result,
     };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-    fetchUserRequest, enterCityName, changeMode
-}, dispatch);
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchWeatherRequest: () => dispatch(fetchWeatherRequest()),
+        onEnterCityName: name => dispatch(enterCityName(name)),
+        onChangeMode: mode => dispatch(changeMode(mode))
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -1,5 +1,5 @@
 import React from "react";
-import Main from "./components/Main";
+import ContentContainer from "./containers/ContentContainer";
 import HeaderContainer from "./containers/HeaderContainer";
 
 export default class App extends React.Component {
@@ -7,7 +7,7 @@ export default class App extends React.Component {
         return (
             <>
                 <HeaderContainer />
-                <Main />
+                <ContentContainer />
             </>
         );
     }

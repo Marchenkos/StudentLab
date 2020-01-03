@@ -1,11 +1,21 @@
 import React from "react";
+import { MainContainer } from "../style/mainStyle";
 import { ContentContainer, BackgroundContainer, Information, Img, InformationBlock, TodayBlock, InformationBlockItem } from "../style/contentStyle";
 import weather from "../../img/weatherImg/rainSun.png";
+
+const now = "now";
+const today = "today";
+const fiveDays = "5 days";
 
 export default class Content extends React.Component {
     constructor(props) {
         super(props);
         this.mode = "now";
+        this.modeToShow = {
+            [now]: this.renderSimpleResult(),
+            [today]: this.renderSimpleResult(),
+            [fiveDays]: this.renderComplexResult()
+        };
     }
 
     renderSimpleResult = () => {
@@ -82,11 +92,13 @@ export default class Content extends React.Component {
 
     render() {
         return (
-            <ContentContainer>
-                <BackgroundContainer>
-                    {this.renderComplexResult()}
-                </BackgroundContainer>
-            </ContentContainer>
+            <MainContainer>
+                <ContentContainer>
+                    <BackgroundContainer>
+                        {this.modeToShow[this.props.mode.toLowerCase()]}
+                    </BackgroundContainer>
+                </ContentContainer>
+            </MainContainer>
         );
     }
 }
