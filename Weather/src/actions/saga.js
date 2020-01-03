@@ -1,5 +1,5 @@
 import { takeLatest, call, put, select } from "redux-saga/effects";
-import { FETCH_WEATHER_REQUEST, fetchUserSuccess, fetchUserError } from "./fetchWeatherAction";
+import { FETCH_WEATHER_REQUEST_NOW, FETCH_WEATHER_REQUEST_TODAY, FETCH_WEATHER_REQUEST_FOR_WEEK, fetchUserSuccess, fetchUserError } from "./fetchWeatherAction";
 import { selectCityName } from "../selectors/selector";
 
 const APIkey = "7e3d24dcd28adb946abe1b502b8a5df8";
@@ -111,5 +111,7 @@ export function* fetchWeatherForWeek() {
 }
 
 export default function* usersSaga() {
-    yield takeLatest(FETCH_WEATHER_REQUEST, fetchWeatherNow);
+    yield takeLatest(FETCH_WEATHER_REQUEST_NOW, fetchWeatherNow);
+    yield takeLatest(FETCH_WEATHER_REQUEST_TODAY, fetchWeatherToday);
+    yield takeLatest(FETCH_WEATHER_REQUEST_FOR_WEEK, fetchWeatherForWeek);
 }

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Header from "../components/Header";
-import { fetchWeatherRequest } from "../actions/fetchWeatherAction";
+import { fetchWeatherRequestNow, fetchWeatherRequestToday, fetchWeatherRequestForWeek } from "../actions/fetchWeatherAction";
 import { enterCityName, changeMode } from "../actions/searchWeatherAction";
 
 const mapStateToProps = (state) => {
@@ -13,7 +13,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchWeatherRequest: () => dispatch(fetchWeatherRequest()),
+        onFetchWeatherRequestNow: () => dispatch(fetchWeatherRequestNow()),
+        onFetchWeatherRequestToday: () => dispatch(fetchWeatherRequestToday()),
+        onFetchWeatherRequestForWeek: () => dispatch(fetchWeatherRequestForWeek()),
         onEnterCityName: name => dispatch(enterCityName(name)),
         onChangeMode: mode => dispatch(changeMode(mode))
     };
