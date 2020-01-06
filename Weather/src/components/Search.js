@@ -9,16 +9,6 @@ export default class Search extends React.Component {
         this.mode = React.createRef();
     }
 
-    // addWeather = () => {
-    //     const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${this.cityNameRef.current.value}&lang=ru&units=metric&APPID=${this.APIkey}`;
-    //     fetch(weatherURL)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             const dailyData = data.list.filter(reading => reading.dt_txt.includes("18:00:00"));
-    //             console.log("Data List Loaded", dailyData);
-    //         });
-    // };
-
     render() {
         return (
             <SearchContainer>

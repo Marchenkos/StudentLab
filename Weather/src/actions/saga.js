@@ -1,29 +1,41 @@
 import { takeLatest, call, put, select } from "redux-saga/effects";
+import moment from "moment";
 import { FETCH_WEATHER_REQUEST_NOW, FETCH_WEATHER_REQUEST_TODAY, FETCH_WEATHER_REQUEST_FOR_WEEK, fetchUserSuccess, fetchUserError } from "./fetchWeatherAction";
 import { selectCityName } from "../selectors/selector";
 
 const APIkey = "7e3d24dcd28adb946abe1b502b8a5df8";
-
-const getDate = () => {
-    const date = new Date();
-    const month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`;
-    const day = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
-
-    return `${date.getFullYear()}-${month}-${day}`;
-};
 
 const filterInformation = list => {
     const { temp, feels_like, humidity, pressure } = list.main;
 
     return {
         tempetature: temp,
-        date: list.dt_txt,
+        date: list.dt_txt.slice(0, 10),
+        time: list.dt_txt.slice(11),
         feelsLike: feels_like,
         humidity,
         pressure,
         wind: list.wind.speed,
         weather: list.weather[0].descripton
     };
+};
+
+const groupInformation = list => {
+    let group = [];
+    const result = [];
+    let currentDate = list[0].date;
+
+    list.map(item => {
+        if (item.date === currentDate) {
+            group.push(item);
+        } else {
+            currentDate = item.date;
+            result.push(group);
+            group = [];
+        }
+    });
+
+    return result;
 };
 
 export function* fetchWeatherNow() {
@@ -44,7 +56,7 @@ export function* fetchWeatherNow() {
             yield put(fetchUserSuccess(filterInformation(response)));
         }
     } catch (error) {
-        const message = "Fall out";
+        const { message } = error;
 
         yield put(fetchUserError(message));
     }
@@ -53,7 +65,8 @@ export function* fetchWeatherNow() {
 export function* fetchWeatherToday() {
     try {
         const cityName = yield select(selectCityName);
-        const currentDate = getDate();
+        const now = moment();
+        const currentDate = now.format("YYYY-MM-DD");
 
         if (cityName) {
             const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&lang=ru&units=metric&APPID=${APIkey}`;
@@ -80,7 +93,8 @@ export function* fetchWeatherToday() {
             yield put(fetchUserSuccess(result));
         }
     } catch (error) {
-        const message = "Fall out";
+        const { message } = error;
+
         yield put(fetchUserError(message));
     }
 }
@@ -101,11 +115,13 @@ export function* fetchWeatherForWeek() {
             });
 
             const result = response.list.map(item => filterInformation(item));
+            const groupResult = groupInformation(result);
 
-            yield put(fetchUserSuccess(result));
+            yield put(fetchUserSuccess(groupResult));
         }
     } catch (error) {
-        const message = "Fall out";
+        const { message } = error;
+
         yield put(fetchUserError(message));
     }
 }

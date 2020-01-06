@@ -16,14 +16,15 @@ export const BackgroundContainer = styled.div`
 
 export const TodayBlock = styled.div`
     width: 400px;
-    height: 350px;
+    height: auto;
     margin: 0 auto;
     background: linear-gradient(90deg, #0f054a 0px, #5d62a6 100%);
     opacity: 0.8;
 
     ${({ complex }) => complex && `
         display: flex;
-        width: 650px;
+        flex-direction: column;
+        width: 65%;
     `}
 `;
 
@@ -33,14 +34,9 @@ export const InformationBlock = styled.div`
     padding:15px;
     align-items: center;
 
-    ${({ complex }) => complex && `
-        flex-wrap: wrap;
-        flex-basis: 45%;
-    `}
-
     ${({ block }) => block === "additional" && `
-    padding-top: 0;
-`}
+        padding-top: 0;
+    `}
 `;
 
 export const InformationBlockItem = styled.div`
@@ -48,6 +44,10 @@ export const InformationBlockItem = styled.div`
     align-items: center;
     flex-direction: column;
     margin: 0 10px;
+
+    ${({ active }) => active && `
+        cursor: pointer;
+    `}
 `;
 
 export const Img = styled.img`

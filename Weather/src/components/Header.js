@@ -9,15 +9,15 @@ const fiveDays = "5 days";
 
 export default function Header({ onFetchWeatherRequestNow, onFetchWeatherRequestToday, onFetchWeatherRequestForWeek, onEnterCityName, onChangeMode }) {
     const modeToFetch = {
-        [now]: onFetchWeatherRequestNow(),
-        [today]: onFetchWeatherRequestToday(),
-        [fiveDays]: onFetchWeatherRequestForWeek()
+        [now]: () => { onFetchWeatherRequestNow(); },
+        [today]: () => { onFetchWeatherRequestToday(); },
+        [fiveDays]: () => { onFetchWeatherRequestForWeek(); }
     };
 
     const getWeather = (name, mode) => {
         onEnterCityName(name);
         onChangeMode(mode);
-        modeToFetch[mode.toLowerCase()];
+        modeToFetch[mode.toLowerCase()]();
     };
 
     return (

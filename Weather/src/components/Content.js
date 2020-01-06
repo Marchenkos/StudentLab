@@ -1,5 +1,6 @@
 import React from "react";
 import { MainContainer } from "../style/mainStyle";
+import { WeatherForWeek } from "./WeatherForWeek";
 import { ContentContainer, BackgroundContainer, Information, Img, InformationBlock, TodayBlock, InformationBlockItem } from "../style/contentStyle";
 import weather from "../../img/weatherImg/rainSun.png";
 
@@ -14,7 +15,7 @@ export default class Content extends React.Component {
         this.modeToShow = {
             [now]: this.renderSimpleResult(),
             [today]: this.renderSimpleResult(),
-            [fiveDays]: this.renderComplexResult()
+            [fiveDays]: <WeatherForWeek result={this.props.result} cityName={this.props.cityName} />
         };
     }
 
@@ -49,53 +50,15 @@ export default class Content extends React.Component {
         );
     };
 
-    renderComplexResult = () => {
-        return (
-            <TodayBlock complex>
-                <InformationBlock block="main">
-                    <InformationBlockItem>
-                        <Img block="main" src={weather} />
-                        <Information bold> -0.65</Information>
-                    </InformationBlockItem>
-                    <InformationBlockItem>
-                        <Information bold>London</Information>
-                        <Information bold={false}>Inf</Information>
-                        <Information bold={false}>Inf</Information>
-                        <Information bold={false}>Inf</Information>
-                    </InformationBlockItem>
-                </InformationBlock>
-                <InformationBlock complex>
-                    <InformationBlockItem>
-                        <Information bold={false}>Morning</Information>
-                        <Img block="additional" src={weather} />
-                        <Information bold={false}>Weather</Information>
-                    </InformationBlockItem>
-                    <InformationBlockItem>
-                        <Information bold={false}>Morning</Information>
-                        <Img block="additional" src={weather} />
-                        <Information bold={false}>Weather</Information>
-                    </InformationBlockItem>
-                    <InformationBlockItem>
-                        <Information bold={false}>Morning</Information>
-                        <Img block="additional" src={weather} />
-                        <Information bold={false}>Weather</Information>
-                    </InformationBlockItem>
-                    <InformationBlockItem>
-                        <Information bold={false}>Morning</Information>
-                        <Img block="additional" src={weather} />
-                        <Information bold={false}>Weather</Information>
-                    </InformationBlockItem>
-                </InformationBlock>
-            </TodayBlock>
-        );
-    };
-
     render() {
         return (
             <MainContainer>
                 <ContentContainer>
                     <BackgroundContainer>
-                        {this.modeToShow[this.props.mode.toLowerCase()]}
+                        {
+                            this.props.result ? <WeatherForWeek result={this.props.result} cityName={this.props.cityName} />
+                                : null
+                        }
                     </BackgroundContainer>
                 </ContentContainer>
             </MainContainer>
