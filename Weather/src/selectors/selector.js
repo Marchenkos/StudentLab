@@ -1,3 +1,2 @@
-
-export const selectCityName = state => state.cityName;
-export const selectMode = state => state.mode;
+export const selectCityNameSelector = state => state.changeSearchTerms.cityName;
+export const selectSearchModeSelector = state => state.changeSearchTerms.searchMode;

@@ -12,3 +12,8 @@
     font-family: Comic Helvetic;
     src: url(./18177.otf);
 }
+
+@font-face {
+    font-family: Colos Text;
+    src: url(./18549.ttf);
+}

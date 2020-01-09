@@ -1,13 +1,14 @@
 import { connect } from "react-redux";
 import Header from "../components/Header";
-import { fetchWeatherRequestNow, fetchWeatherRequestToday, fetchWeatherRequestForWeek } from "../actions/fetchWeatherAction";
-import { enterCityName, changeMode } from "../actions/searchWeatherAction";
+import { fetchWeatherRequestNow, fetchWeatherRequestToday, fetchWeatherRequestForWeek } from "../actions/fetchWeatherActions";
+import { enterCityName, changeMode } from "../actions/searchWeatherActions";
+import { clearResult } from "../actions/changeResultActions";
 
 const mapStateToProps = (state) => {
     return {
-        cityName: state.cityName,
-        mode: state.mode,
-        result: state.result,
+        cityName: state.changeSearchTerms.cityName,
+        searchMode: state.changeSearchTerms.searchMode,
+        result: state.fetchWeather.result,
     };
 };
 
@@ -17,7 +18,8 @@ const mapDispatchToProps = dispatch => {
         onFetchWeatherRequestToday: () => dispatch(fetchWeatherRequestToday()),
         onFetchWeatherRequestForWeek: () => dispatch(fetchWeatherRequestForWeek()),
         onEnterCityName: name => dispatch(enterCityName(name)),
-        onChangeMode: mode => dispatch(changeMode(mode))
+        onChangeMode: mode => dispatch(changeMode(mode)),
+        onClearResult: () => dispatch(clearResult())
     };
 };
 

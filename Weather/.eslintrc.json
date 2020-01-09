@@ -50,7 +50,7 @@
         "consistent-return": "off",
         "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 3 }],
         "object-property-newline": "error",
-        "max-len":["error", 250],
+        "max-len":["error", 135],
         "no-nested-ternary": "off",
         "react/jsx-indent":"off",
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],

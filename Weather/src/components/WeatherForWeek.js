@@ -1,19 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import moment from "moment";
-import { Information, Img, InformationBlock, TodayBlock, InformationBlockItem } from "../style/contentStyle";
-import { WeatherHeaders, HeaderItem } from "../style/weatherForWeekStyle";
-import weatherIcon from "../../img/weatherImg/rainSun.png";
+import MainBlockWeather from "./MainBlockWeather";
+import AdditionalBockWeather from "./AdditionalBockWeather";
+import { ContentBlock } from "../style/contentStyle";
+import { Headers, HeaderItem } from "../style/headersStyle";
 
-export function WeatherForWeek({ result, cityName }) {
+export default function WeatherForWeek({ result, cityName }) {
     const [currentWeather, setCurrentWeather] = useState(result[0]);
-    const [days, setDays] = useState([]);
     const [currentDay, setCurrentDay] = useState("");
+    const [daysOfTheWeek, setDaysOfTheWeek] = useState([]);
+    const [detailInformation, setDetailInformation] = useState({});
+    const [isLoad, setIsLoad] = useState(false);
+
+    useEffect(() => {
+        if (!result) {
+            setIsLoad(false);
+        } else {
+            setIsLoad(true);
+        }
+    }, [result]);
 
     useEffect(() => {
         const listOfDays = [];
-        moment.locale("en");
 
-        if (result) {
+        if (result.length > 0) {
             result.map(item => {
                 item.map(data => {
                     !listOfDays.includes(moment(data.date, "YYYY-MM-DD").format("dddd"))
@@ -23,76 +33,48 @@ export function WeatherForWeek({ result, cityName }) {
             });
         }
 
-        setDays(listOfDays);
+        setDaysOfTheWeek(listOfDays);
         setCurrentDay(listOfDays[0]);
     }, [result]);
 
-    const chooseDay = e => {
-        setCurrentDay(e.target.value);
-    };
+    useEffect(() => {
+        setDetailInformation(currentWeather[0]);
+    }, [currentWeather]);
 
     useEffect(() => {
-        const indexWeather = days.indexOf(currentDay);
+        const indexWeather = daysOfTheWeek.indexOf(currentDay);
 
         if (indexWeather !== -1) {
             setCurrentWeather(result[indexWeather]);
         }
     }, [currentDay]);
 
-    const { tempetature, feelsLike, humidity, pressure, wind, weather } = currentWeather[0];
+    const chooseDay = e => {
+        setCurrentDay(e.target.value);
+    };
+
+    const changeDetailInformation = useCallback(index => {
+        setDetailInformation(currentWeather[index]);
+    }, [currentWeather]);
 
     return (
-        result && days.length > 0 ? (
+        isLoad ? (
             <>
-                <WeatherHeaders>
+                <Headers>
                     {
-                        days.map((day, index) => {
-                            return day === currentDay ? <HeaderItem key={index} onClick={chooseDay} value={day} active>{day}</HeaderItem>
-                                : <HeaderItem key={index} value={day} onClick={chooseDay}>{day}</HeaderItem>;
+                        daysOfTheWeek.map((day, index) => {
+                            return (
+                                <HeaderItem key={index} onClick={chooseDay} value={day} active={day === currentDay}>
+                                    {day}
+                                </HeaderItem>
+                            );
                         })
                     }
-                </WeatherHeaders>
-                <TodayBlock complex>
-                    <InformationBlock block="main">
-                        <InformationBlockItem>
-                            <Img block="main" src={weatherIcon} />
-                            <Information bold>{tempetature}</Information>
-                            <Information bold={false}>
-                            Real feel:
-                                {feelsLike}
-                            </Information>
-                            <Information bold>{weather}</Information>
-                        </InformationBlockItem>
-                        <InformationBlockItem>
-                            <Information bold>{cityName}</Information>
-                            <Information bold={false}>
-                            Humidity 
-                                {humidity}
-                            </Information>
-                            <Information bold={false}>
-                            Pressure 
-                                {pressure}
-                            </Information>
-                            <Information bold={false}>
-                            Wind speed 
-                                {wind}
-                            </Information>
-                        </InformationBlockItem>
-                    </InformationBlock>
-                    <InformationBlock complex>
-                        {
-                            currentWeather.map(item => {
-                                return (
-                                    <InformationBlockItem active>
-                                        <Information bold={false}>{item.time}</Information>
-                                        <Img block="additional" src={weatherIcon} />
-                                        <Information bold={false}>{item.tempetature}</Information>
-                                    </InformationBlockItem>
-                                );
-                            })
-                        }
-                    </InformationBlock>
-                </TodayBlock>
+                </Headers>
+                <ContentBlock complex>
+                    <MainBlockWeather listOfData={detailInformation} cityName={cityName} />
+                    <AdditionalBockWeather listOfData={currentWeather} changeDetailInformation={changeDetailInformation} />
+                </ContentBlock>
             </>
         ) : null
     );

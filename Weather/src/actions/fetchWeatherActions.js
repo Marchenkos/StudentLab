@@ -29,9 +29,9 @@ export const fetchUserSuccess = result => {
     };
 };
 
-export const fetchUserError = message => {
+export const fetchUserError = errorMessage => {
     return {
         type: FETCH_WEATHER_ERROR,
-        message
+        errorMessage
     };
 };

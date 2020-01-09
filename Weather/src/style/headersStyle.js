@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const WeatherHeaders = styled.div`
+export const Headers = styled.div`
     font-family: Comic Helvetic;
     display: flex;
     width: 50%;
@@ -17,6 +17,6 @@ export const HeaderItem = styled.button`
     cursor: pointer;
 
     ${({ active }) => active && `
-        background: red;
+        background: #272266;
     `}
 `;

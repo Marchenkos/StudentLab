@@ -38,12 +38,12 @@ export const Select = styled.select`
     margin-right: 40px;
     color: #0f054a;
     border: none;
+`;
 
-    option {
-        font-family: Comic Helvetic;
-        color: #0f054a;
-        margin-top: 10px;
-        outline:none;
-        font-size: 20px;
-    }
+export const Option = styled.option`
+    font-family: Comic Helvetic;
+    color: #0f054a;
+    margin-top: 10px;
+    outline:none;
+    font-size: 20px;
 `;
