@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import debounce from "lodash.debounce";
 import styled from "styled-components";
 import Search from "./Search";
-import { Img } from "../style/contentStyle";
 import logo from "../../img/logo.png";
 import { device } from "../style/device";
 import { now, today, fiveDays, delayBeforeSubmit } from "../constants";
@@ -18,6 +17,27 @@ const HeaderConatainer = styled.div`
     @media ${device.mobile} {
         justify-content: center;
         background: none;
+    }
+`;
+
+const Img = styled.img`
+    max-width: 100px;
+    margin-right: 15px;
+
+    ${({ block }) => block === "main" && `
+        max-width: 85px;
+    `}
+
+    ${({ block }) => block === "additional" && `
+        max-width: 70px;
+    `}
+
+    @media ${device.laptop} {
+        margin-right: 0;
+    }
+
+    @media ${device.tablet} {
+        max-width: 80px;
     }
 `;
 
