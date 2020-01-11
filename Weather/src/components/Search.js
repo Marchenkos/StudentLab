@@ -6,6 +6,10 @@ import { device } from "../style/device";
 const SearchContainer = styled.div`
     display: flex;
     align-items: flex-end;
+
+    @media ${device.mobile} {
+        margin: 30px auto 10px;
+    }
 `;
 
 const SearchButton = styled.img`
@@ -30,6 +34,10 @@ const SearchLine = styled.input`
     &::-webkit-input-placeholder {
         color: #0f054a;
         font-family: Comic Helvetic;
+
+        @media ${device.mobile} {
+            color: white;
+        }
     }
 
     @media ${device.tablet} {
@@ -38,6 +46,10 @@ const SearchLine = styled.input`
         border-radius: 5px;
         height: 30px;
         padding: 3px 5px 0;
+    }
+
+    @media ${device.mobile} {
+        color: white;
     }
 `;
 
@@ -53,6 +65,12 @@ const Select = styled.select`
 
     @media ${device.tablet} {
         font-size: 18px;
+        color: white;
+        margin-right: 5px;
+    }
+
+    @media ${device.mobile} {
+        margin-right: 8px;
     }
 `;
 
@@ -65,6 +83,11 @@ const Option = styled.option`
 
     @media ${device.tablet} {
         font-size: 18px;
+    }
+
+    @media ${device.mobile} {
+        font-size: 13px;
+        outline: none;
     }
 `;
 

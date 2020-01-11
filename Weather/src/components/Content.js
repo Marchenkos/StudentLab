@@ -40,7 +40,9 @@ const ContentContainer = styled.div`
     padding:20px;
 
     @media ${device.mobile} {
-        background: none;
+        background-image: url(../../img/123.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
     }
 `;
 
@@ -61,13 +63,14 @@ const BackgroundContainer = styled.div`
     }
 
     @media ${device.tablet} {
-        height: 450px;
+        min-height: 450px;
         background-image: url(../../img/background2.jpg);
     }
 
     @media ${device.mobile} {
         background-image: none;
-        height: 300px;
+        height: 600px;
+        padding-top: 10px;
     }
 `;
 

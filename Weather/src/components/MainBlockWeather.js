@@ -13,6 +13,11 @@ const InformationBlock = styled.div`
         padding: 0;
     }
 
+    
+    @media ${device.mobile} {
+        flex-direction: column;
+    }
+
     ${({ complex }) => complex && `
         padding-top: 0;
 
@@ -92,12 +97,16 @@ const Img = styled.img`
     }
 `;
 
-export default function MainBlockWeather({ listOfData, cityName }) {
+export default function MainBlockWeather({ listOfData, cityName, currentDay }) {
     const { tempetature, feelsLike, humidity, pressure, wind, weather } = listOfData;
 
     return (
         <InformationBlock block="main">
             <InformationBlockItem>
+                {
+                    currentDay ? <Information bold>{currentDay}</Information>
+                        : null
+                }
                 <Img block="main" src={cloud} />
                 <Information bold>
                     {tempetature}

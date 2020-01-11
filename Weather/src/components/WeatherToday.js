@@ -19,23 +19,12 @@ const ContentBlock = styled.div`
     @media ${device.laptop} {
         width: 65%;
         padding: 20px;
-    }
+    };
 
-    ${({ complex }) => complex && `
-        background: linear-gradient(90deg, #0f054a 0px, #5d62a6 100%);
-        display: flex;
-        flex-direction: column;
-        width: 65%;
-
-        @media ${device.laptop} {
-            width: 70%;
-        }
-
-        @media ${device.tablet} {
-            width: 80%;
-            padding: 15px 0;
-        }
-    `}
+    @media ${device.mobile} {
+        background-color: #814bc7;
+        background-image: url(../../img/backgroundWindow.jpg);
+    };
 `;
 
 export default function WeatherToday({ result, cityName }) {

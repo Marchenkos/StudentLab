@@ -3,7 +3,9 @@ import moment from "moment";
 import styled from "styled-components";
 import MainBlockWeather from "./MainBlockWeather";
 import AdditionalBockWeather from "./AdditionalBockWeather";
+import { maxModileWidth } from "../constants";
 import { device } from "../style/device";
+import mobileVersionHelper from "../additionalFunctions/mobileVersionHelper";
 
 const Headers = styled.div`
     font-family: Comic Helvetic;
@@ -15,6 +17,22 @@ const Headers = styled.div`
     @media ${device.tablet} {
         width: 68%;
     }
+`;
+
+const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin: 10px auto;
+    width: 80%;
+`;
+
+const Button = styled.button`
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #120748;
+    font-family: Comic Helvetic;
+    font-size: 25px;
 `;
 
 const HeaderItem = styled.button`
@@ -74,6 +92,7 @@ export default function WeatherForWeek({ result, cityName }) {
     const [daysOfTheWeek, setDaysOfTheWeek] = useState([]);
     const [detailInformation, setDetailInformation] = useState({});
     const [isLoad, setIsLoad] = useState(false);
+    const [isMobileVersion, setIsMobileVersion] = useState(window.innerWidth < maxModileWidth);
 
     useEffect(() => {
         if (!result) {
@@ -100,6 +119,14 @@ export default function WeatherForWeek({ result, cityName }) {
         setCurrentDay(listOfDays[0]);
     }, [result]);
 
+    const changeVersion = () => {
+        setIsMobileVersion(window.innerWidth < maxModileWidth);
+    };
+
+    useEffect(() => {
+        mobileVersionHelper(changeVersion);
+    }, []);
+
     useEffect(() => {
         setDetailInformation(currentWeather[0]);
     }, [currentWeather]);
@@ -116,29 +143,58 @@ export default function WeatherForWeek({ result, cityName }) {
         setCurrentDay(e.target.value);
     };
 
+    const changeDay = e => {
+        const currentIndex = daysOfTheWeek.indexOf(currentDay);
+
+        if (e.target.value === "next") {
+            if (daysOfTheWeek.length !== currentIndex + 1) {
+                setCurrentDay(daysOfTheWeek[currentIndex + 1]);
+            }
+        } else if (currentIndex - 1 > -1) {
+            setCurrentDay(daysOfTheWeek[currentIndex - 1]);
+        }
+    };
+
     const changeDetailInformation = useCallback(index => {
         setDetailInformation(currentWeather[index]);
     }, [currentWeather]);
 
-    return (
-        isLoad ? (
+    const isMobile = () => {
+        return (
             <>
-                <Headers>
-                    {
-                        daysOfTheWeek.map((day, index) => {
-                            return (
-                                <HeaderItem key={index} onClick={chooseDay} value={day} active={day === currentDay}>
-                                    {day}
-                                </HeaderItem>
-                            );
-                        })
-                    }
-                </Headers>
+                <ButtonContainer>
+                    <Button onClick={changeDay} value="prev">Previous</Button>
+                    <Button onClick={changeDay} value="next">Next</Button>
+                </ButtonContainer>
                 <ContentBlock complex>
-                    <MainBlockWeather listOfData={detailInformation} cityName={cityName} />
-                    <AdditionalBockWeather listOfData={currentWeather} changeDetailInformation={changeDetailInformation} />
+                    <MainBlockWeather currentDay={currentDay} listOfData={detailInformation} cityName={cityName} />
                 </ContentBlock>
             </>
+        );
+    };
+
+    return (
+        isLoad ? (
+            isMobileVersion ? isMobile()
+                : (
+                    <>
+                        <Headers>
+                            {
+                                daysOfTheWeek.map((day, index) => {
+                                    return (
+                                        <HeaderItem key={index} onClick={chooseDay} value={day} active={day === currentDay}>
+                                            {day}
+                                        </HeaderItem>
+                                    );
+                                })
+                            }
+                        </Headers>
+                        <ContentBlock complex>
+                            <MainBlockWeather listOfData={detailInformation} cityName={cityName} />
+                            <AdditionalBockWeather listOfData={currentWeather} changeDetailInformation={changeDetailInformation} />
+                        </ContentBlock>
+                    </>
+                )
         ) : null
     );
 }
