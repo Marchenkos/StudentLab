@@ -1,7 +1,9 @@
+import { now } from "../constants";
+
 export const filterInformation = (list, mode) => {
     const { temp, feels_like, humidity, pressure } = list.main;
 
-    return mode !== "Now"
+    return mode !== now
         ? {
             tempetature: Math.floor(temp),
             date: list.dt_txt.slice(0, 10),

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import search from "../../img/search.png";
 import { device } from "../style/device";
+import { TIME_PERIOD } from "../constants";
 
-const SearchContainer = styled.div`
+const SearchBlock = styled.div`
     display: flex;
     align-items: flex-end;
 
@@ -91,28 +92,21 @@ const Option = styled.option`
     }
 `;
 
-export default class Search extends React.Component {
-    constructor(props) {
-        super(props);
-        this.cityNameRef = React.createRef();
-        this.mode = React.createRef();
-    }
+export default function Search({ getWeather }) {
+    const cityNameRef = useRef(null);
+    const mode = useRef(null);
 
-    getWeatherResult = () => {
-        this.props.getWeather(this.cityNameRef.current.value, this.mode.current.value);
-    }
+    const getWeatherResult = () => getWeather(cityNameRef.current.value, mode.current.value);
 
-    render() {
-        return (
-            <SearchContainer>
-                <Select ref={this.mode}>
-                    <Option>Now</Option>
-                    <Option>Today</Option>
-                    <Option>5 days</Option>
-                </Select>
-                <SearchLine placeholder="Enter the city" ref={this.cityNameRef} />
-                <SearchButton src={search} onClick={this.getWeatherResult} />
-            </SearchContainer>
-        );
-    }
+    return (
+        <SearchBlock>
+            <Select ref={mode}>
+                <Option>{TIME_PERIOD.NOW}</Option>
+                <Option>{TIME_PERIOD.TODAY}</Option>
+                <Option>{TIME_PERIOD.FIVE_DAYS}</Option>
+            </Select>
+            <SearchLine placeholder="Enter the city" ref={cityNameRef} />
+            <SearchButton src={search} onClick={getWeatherResult} />
+        </SearchBlock>
+    );
 }

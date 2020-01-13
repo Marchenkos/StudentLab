@@ -5,10 +5,11 @@ import Search from "./Search";
 import logo from "../../img/logo.png";
 import { device } from "../style/device";
 import { now, today, fiveDays, delayBeforeSubmit, maxModileWidth } from "../constants";
+import { Img } from "../style/contentStyle";
 import mobileVersionHelper from "../additionalFunctions/mobileVersionHelper";
 import "../style/menu-button.css";
 
-const HeaderConatainer = styled.div`
+const HeaderBlock = styled.div`
     background: linear-gradient(90deg, #0f054a 0px, #5d62a6 100%);
     color: #f2eafc;
     display: flex;
@@ -24,29 +25,7 @@ const HeaderConatainer = styled.div`
     }
 `;
 
-const Img = styled.img`
-    max-width: 100px;
-    margin-right: 15px;
-    src: ${"../../img/weahterImg/snow.png"}
-
-    ${({ block }) => block === "main" && `
-        max-width: 85px;
-    `}
-
-    ${({ block }) => block === "additional" && `
-        max-width: 70px;
-    `}
-
-    @media ${device.laptop} {
-        margin-right: 0;
-    }
-
-    @media ${device.tablet} {
-        max-width: 80px;
-    }
-`;
-
-const LogoContainer = styled.div`
+const LogoBlock = styled.div`
     display: flex;
     align-items: flex-end;
     flex-grow: 1;
@@ -73,8 +52,12 @@ const LogoName = styled.span`
 `;
 
 export default function Header({
-    onFetchWeatherRequestNow, onFetchWeatherRequestToday, onFetchWeatherRequestForWeek,
-    onEnterCityName, onChangeMode, onClearResult }) {
+    onFetchWeatherRequestNow,
+    onFetchWeatherRequestToday,
+    onFetchWeatherRequestForWeek,
+    onEnterCityName,
+    onChangeMode,
+    onClearResult }) {
 
     const [isDisplaySearchLine, setDisplaySearchLine] = useState(true);
 
@@ -84,17 +67,11 @@ export default function Header({
         [fiveDays]: () => { onFetchWeatherRequestForWeek(); }
     };
 
-    const getWeatherWithDebounce = debounce(mode => {
-        modeToFetch[mode.toLowerCase()]();
-    }, delayBeforeSubmit);
+    const getWeatherWithDebounce = debounce(mode => modeToFetch[mode.toLowerCase()](), delayBeforeSubmit);
 
-    const showSearchLine = () => {
-        setDisplaySearchLine(!isDisplaySearchLine);
-    };
+    const showSearchLine = () => setDisplaySearchLine(!isDisplaySearchLine);
 
-    const showSearchElements = () => {
-        setDisplaySearchLine(window.innerWidth > maxModileWidth);
-    };
+    const showSearchElements = () => setDisplaySearchLine(window.innerWidth > maxModileWidth);
 
     const getWeather = useCallback((name, mode) => {
         onClearResult();
@@ -103,7 +80,7 @@ export default function Header({
         getWeatherWithDebounce(mode);
     }, []);
 
-    const isMobile = () => {
+    const renderContent = () => {
         return window.innerWidth < maxModileWidth
             ? (
                 <>
@@ -113,18 +90,16 @@ export default function Header({
             ) : <Search getWeather={getWeather} />;
     };
 
-    useEffect(() => {
-        mobileVersionHelper(showSearchElements);
-    }, []);
+    useEffect(() => mobileVersionHelper(showSearchElements), []);
 
     return (
-        <HeaderConatainer>
-            <LogoContainer>
+        <HeaderBlock>
+            <LogoBlock>
                 <Img src={logo} />
                 <LogoName>Weather</LogoName>
-            </LogoContainer>
-            {isDisplaySearchLine ? isMobile()
+            </LogoBlock>
+            {isDisplaySearchLine ? renderContent()
                 : <button type="submit" className="icon-menu-outline menu-button" onClick={showSearchLine} />}
-        </HeaderConatainer>
+        </HeaderBlock>
     );
 }

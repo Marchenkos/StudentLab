@@ -35,7 +35,7 @@ const Spinner = styled.div`
     }
 `;
 
-const ContentContainer = styled.div`
+const InformationContainer = styled.div`
     background: linear-gradient(90deg, #0f054a 0px, #5d62a6 100%);
     padding:20px;
 
@@ -82,7 +82,7 @@ export default function Content({ result, cityName, searchMode }) {
     };
 
     return (
-        <ContentContainer>
+        <InformationContainer>
             <BackgroundContainer>
                 {
                     cityName ? (
@@ -91,6 +91,6 @@ export default function Content({ result, cityName, searchMode }) {
                     ) : null
                 }
             </BackgroundContainer>
-        </ContentContainer>
+        </InformationContainer>
     );
 }

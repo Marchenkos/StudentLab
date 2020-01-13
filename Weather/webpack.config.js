@@ -15,7 +15,7 @@ module.exports = {
                 use: ["babel-loader", "eslint-loader"],
             },
             {
-                test: /\.less$/,
+                test: /.(le|c)ss$/,
                 use: [
                     {
                         loader: "style-loader"
@@ -27,17 +27,6 @@ module.exports = {
                         loader: "less-loader"
                     }
                 ]
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    {
-                        loader: "style-loader",
-                    },
-                    {
-                        loader: "css-loader",
-                    }
-                ],
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)$/,
