@@ -7,6 +7,7 @@ const mapStateToProps = (state) => {
         cityName: selectCityNameSelector(state),
         searchMode: selectSearchModeSelector(state),
         result: state.fetchWeather.result,
+        error: state.fetchWeather.error
     };
 };
 

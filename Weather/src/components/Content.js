@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import WeatherForWeek from "./WeatherForWeek";
 import WeatherToday from "./WeatherToday";
 import WeatherNow from "./WeatherNow";
 import { device } from "../style/device";
-import { now, today, fiveDays } from "../constants";
+import { now, today, fiveDays, maxModileWidth } from "../constants";
+import { changeStyleForMobile, changeStyleForDesktop } from "../additionalFunctions/changeStyleForMobile";
+import mobileVersionHelper from "../additionalFunctions/mobileVersionHelper";
+import errorPageMobile from "../../img/errorPageMobile.png";
+import errorPage from "../../img/errorPage2.png";
 
 const spinner = keyframes`
     0% {
@@ -74,23 +78,48 @@ const BackgroundContainer = styled.div`
     }
 `;
 
-export default function Content({ result, cityName, searchMode }) {
+const ErroImg = styled.img`
+    max-width: 100%;
+`;
+
+export default function Content({ result, cityName, searchMode, error }) {
     const modeToShow = {
         [now]: () => <WeatherNow result={result} cityName={cityName} />,
         [today]: () => <WeatherToday result={result} cityName={cityName} />,
         [fiveDays]: () => <WeatherForWeek result={result} cityName={cityName} />
     };
 
+    const [isMobileVersion, setIsMobileVersion] = useState(window.innerWidth < maxModileWidth);
+
+    const changeVersion = () => setIsMobileVersion(window.innerWidth < maxModileWidth);
+
+    const renderErrorMessage = () => {
+        if (isMobileVersion) {
+            changeStyleForMobile();
+
+            return <ErroImg block="error" src={errorPageMobile} />;
+        } else {
+            changeStyleForDesktop();
+
+            return <ErroImg block="error" src={errorPage} />;
+        }
+    };
+
+    useEffect(() => mobileVersionHelper(changeVersion), []);
+
     return (
-        <InformationContainer>
-            <BackgroundContainer>
-                {
-                    cityName ? (
-                        result ? modeToShow[searchMode.toLowerCase()]()
-                            : <Spinner />
-                    ) : null
-                }
-            </BackgroundContainer>
-        </InformationContainer>
+        error ? renderErrorMessage()
+            : (
+                <InformationContainer>
+                    <BackgroundContainer>
+                        {
+                            cityName ? (
+                                result ? modeToShow[searchMode.toLowerCase()]()
+                                    : <Spinner />
+                            ) : null
+                        }
+                    </BackgroundContainer>
+                </InformationContainer>
+            )
     );
 }

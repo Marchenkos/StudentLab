@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
-import search from "../../img/search.png";
 import { device } from "../style/device";
 import { TIME_PERIOD } from "../constants";
+import search from "../../img/search.png";
 
 const SearchBlock = styled.div`
     display: flex;
