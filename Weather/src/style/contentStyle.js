@@ -26,6 +26,8 @@ export const InformationBlock = styled.div`
     `}
 `;
 
+InformationBlock.displayName = "InformationBlock";
+
 export const InformationBlockItem = styled.div`
     display:flex;
     align-items: center;
@@ -43,6 +45,8 @@ export const InformationBlockItem = styled.div`
         padding-top: 0px;
     }
 `;
+
+InformationBlockItem.displayName = "InformationBlockItem";
 
 export const Information = styled.span`
     font-size: 20px;
@@ -74,6 +78,8 @@ export const Information = styled.span`
 
     color: white;
 `;
+
+Information.displayName = "Information";
 
 export const Img = styled.img`
     max-width: 100px;
@@ -108,6 +114,8 @@ export const Img = styled.img`
         margin-right: 0;
     }
 `;
+
+Img.displayName = "Img";
 
 export const ContentBlock = styled.div`
     height: auto;
@@ -147,3 +155,5 @@ export const ContentBlock = styled.div`
         }
     `}
 `;
+
+ContentBlock.displayName = "ContentBlock";

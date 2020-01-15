@@ -13,6 +13,8 @@ const SearchBlock = styled.div`
     }
 `;
 
+SearchBlock.displayName = "SearchBlock";
+
 const SearchButton = styled.img`
     max-width: 40px;
 
@@ -21,6 +23,8 @@ const SearchButton = styled.img`
         max-width: 27px;
     }
 `;
+
+SearchButton.displayName = "SearchButton";
 
 const SearchLine = styled.input`
     border: none;
@@ -54,6 +58,8 @@ const SearchLine = styled.input`
     }
 `;
 
+SearchLine.displayName = "SearchLine";
+
 const Select = styled.select`
     height: 35px;
     outline:none;
@@ -75,6 +81,8 @@ const Select = styled.select`
     }
 `;
 
+Select.displayName = "Select";
+
 const Option = styled.option`
     font-family: Comic Helvetic;
     color: #0f054a;
@@ -92,6 +100,8 @@ const Option = styled.option`
     }
 `;
 
+Option.displayName = "Option";
+
 export default function Search({ getWeather }) {
     const cityNameRef = useRef(null);
     const mode = useRef(null);
@@ -105,7 +115,7 @@ export default function Search({ getWeather }) {
                 <Option>{TIME_PERIOD.TODAY}</Option>
                 <Option>{TIME_PERIOD.FIVE_DAYS}</Option>
             </Select>
-            <SearchLine placeholder="Enter the city" ref={cityNameRef} />
+            <SearchLine placeholder="Enter the city" value="London" ref={cityNameRef} />
             <SearchButton src={search} onClick={getWeatherResult} />
         </SearchBlock>
     );

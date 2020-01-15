@@ -8,7 +8,7 @@ export default function AdditionalBockWeather({ listOfData, changeDetailInformat
     return (
         <InformationBlock complex>
             {
-                listOfData.map((item, index) => {
+                listOfData ? listOfData.map((item, index) => {
                     return (
                         <InformationBlockItem key={index} index={index} onClick={() => { onChangeDetailInformation(index); }} active>
                             <Information bold={false} additional>{item.time}</Information>
@@ -20,6 +20,7 @@ export default function AdditionalBockWeather({ listOfData, changeDetailInformat
                         </InformationBlockItem>
                     );
                 })
+                    : null
             }
         </InformationBlock>
     );
