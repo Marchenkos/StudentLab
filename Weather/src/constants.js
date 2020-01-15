@@ -13,6 +13,7 @@ export const TIME_PERIOD = {
 export const ICONS_COLLECTION = new Map([
     ["01", "../../img/weatherImg/sun.png"],
     ["02", "../../img/weatherImg/rainSun.png"],
+    ["03", "../../img/weatherImg/scatteredClouds.png"],
     ["04", "../../img/weatherImg/brokenClouds.png"],
     ["09", "../../img/weatherImg/rain.png"],
     ["10", "../../img/weatherImg/rainSun.png"],

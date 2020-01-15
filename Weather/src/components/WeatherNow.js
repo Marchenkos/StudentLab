@@ -6,11 +6,7 @@ export default function WeatherNow({ result, cityName }) {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        if (!result) {
-            setIsLoaded(false);
-        } else {
-            setIsLoaded(true);
-        }
+        !result ? setIsLoaded(false) : setIsLoaded(true);
     }, [result]);
 
     return (

@@ -115,7 +115,7 @@ export default function Search({ getWeather }) {
                 <Option>{TIME_PERIOD.TODAY}</Option>
                 <Option>{TIME_PERIOD.FIVE_DAYS}</Option>
             </Select>
-            <SearchLine placeholder="Enter the city" value="London" ref={cityNameRef} />
+            <SearchLine placeholder="Enter the city" ref={cityNameRef} />
             <SearchButton src={search} onClick={getWeatherResult} />
         </SearchBlock>
     );
