@@ -3,7 +3,7 @@ import moment from "moment";
 import styled from "styled-components";
 import MainBlockWeather from "./MainBlockWeather";
 import AdditionalBockWeather from "./AdditionalBockWeather";
-import { maxModileWidth } from "../constants";
+import { MAX_MOBILE_WIDTH } from "../constants";
 import { device } from "../style/device";
 import { ContentBlock } from "../style/contentStyle";
 import mobileVersionHelper from "../additionalFunctions/mobileVersionHelper";
@@ -58,10 +58,10 @@ export default function WeatherForWeek({ result, cityName }) {
     const [currentDay, setCurrentDay] = useState("");
     const [daysOfTheWeek, setDaysOfTheWeek] = useState([]);
     const [detailInformation, setDetailInformation] = useState({});
-    const [isLoad, setIsLoad] = useState(false);
-    const [isMobileVersion, setIsMobileVersion] = useState(window.innerWidth < maxModileWidth);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [isMobileVersion, setIsMobileVersion] = useState(window.innerWidth < MAX_MOBILE_WIDTH);
 
-    const changeVersion = () => setIsMobileVersion(window.innerWidth < maxModileWidth);
+    const changeVersion = () => setIsMobileVersion(window.innerWidth < MAX_MOBILE_WIDTH);
 
     const chooseDay = e => setCurrentDay(e.target.value);
 
@@ -77,7 +77,7 @@ export default function WeatherForWeek({ result, cityName }) {
         }
     };
 
-    const isMobile = () => {
+    const renderForMobileVersion = () => {
         return (
             <>
                 <ButtonContainer>
@@ -97,9 +97,9 @@ export default function WeatherForWeek({ result, cityName }) {
 
     useEffect(() => {
         if (!result) {
-            setIsLoad(false);
+            setIsLoaded(false);
         } else {
-            setIsLoad(true);
+            setIsLoaded(true);
         }
     }, [result]);
 
@@ -131,8 +131,8 @@ export default function WeatherForWeek({ result, cityName }) {
     const changeDetailInformation = useCallback(index => setDetailInformation(currentWeather[index]), [currentWeather]);
 
     return (
-        isLoad ? (
-            isMobileVersion ? isMobile()
+        isLoaded ? (
+            isMobileVersion ? renderForMobileVersion()
                 : (
                     <>
                         <Headers>

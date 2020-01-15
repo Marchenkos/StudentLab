@@ -4,7 +4,7 @@ import WeatherForWeek from "./WeatherForWeek";
 import WeatherToday from "./WeatherToday";
 import WeatherNow from "./WeatherNow";
 import { device } from "../style/device";
-import { now, today, fiveDays, maxModileWidth } from "../constants";
+import { NOW, TODAY, FIVE_DAYS, MAX_MOBILE_WIDTH } from "../constants";
 import { changeStyleForMobile, changeStyleForDesktop } from "../additionalFunctions/changeStyleForMobile";
 import mobileVersionHelper from "../additionalFunctions/mobileVersionHelper";
 import errorPageMobile from "../../img/errorPageMobile.png";
@@ -84,14 +84,14 @@ const ErroImg = styled.img`
 
 export default function Content({ result, cityName, searchMode, error }) {
     const modeToShow = {
-        [now]: () => <WeatherNow result={result} cityName={cityName} />,
-        [today]: () => <WeatherToday result={result} cityName={cityName} />,
-        [fiveDays]: () => <WeatherForWeek result={result} cityName={cityName} />
+        [NOW]: () => <WeatherNow result={result} cityName={cityName} />,
+        [TODAY]: () => <WeatherToday result={result} cityName={cityName} />,
+        [FIVE_DAYS]: () => <WeatherForWeek result={result} cityName={cityName} />
     };
 
-    const [isMobileVersion, setIsMobileVersion] = useState(window.innerWidth < maxModileWidth);
+    const [isMobileVersion, setIsMobileVersion] = useState(window.innerWidth < MAX_MOBILE_WIDTH);
 
-    const changeVersion = () => setIsMobileVersion(window.innerWidth < maxModileWidth);
+    const changeVersion = () => setIsMobileVersion(window.innerWidth < MAX_MOBILE_WIDTH);
 
     const renderErrorMessage = () => {
         if (isMobileVersion) {

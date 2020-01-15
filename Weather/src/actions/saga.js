@@ -7,7 +7,7 @@ import { FETCH_WEATHER_REQUEST_NOW,
     fetchUserSuccess, fetchUserError } from "./fetchWeatherActions";
 import { selectCityNameSelector, selectSearchModeSelector } from "../selectors/selector";
 import { filterInformation, groupInformation } from "../additionalFunctions/convertData";
-import { maxResult } from "../constants";
+import { MAX_RESULT } from "../constants";
 
 export function* fetchWeatherNow() {
     try {
@@ -16,8 +16,6 @@ export function* fetchWeatherNow() {
 
         if (cityName) {
             const response = yield call(getWeatherNow, cityName);
-
-            console.log(response);
 
             yield put(fetchUserSuccess(filterInformation(response, searchMode.toLowerCase())));
         }
@@ -37,8 +35,7 @@ export function* fetchWeatherToday() {
         const currentDate = now.format("YYYY-MM-DD");
 
         if (cityName) {
-            const response = yield call(getWeatherToday, cityName, currentDate, maxResult);
-            console.log(response);
+            const response = yield call(getWeatherToday, cityName, currentDate, MAX_RESULT);
 
             const result = response.map(item => filterInformation(item));
 
@@ -58,7 +55,6 @@ export function* fetchWeatherForWeek() {
 
         if (cityName) {
             const response = yield call(getWeatherForWeek, cityName);
-            console.log(response);
 
             const result = response.list.map(item => filterInformation(item));
             const groupResult = groupInformation(result, searchMode);

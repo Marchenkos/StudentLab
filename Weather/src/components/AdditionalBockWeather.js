@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { InformationBlock, InformationBlockItem, Information, Img } from "../style/contentStyle";
-import { iconsCollection } from "../constants";
+import { ICONS_COLLECTION } from "../constants";
 
 export default function AdditionalBockWeather({ listOfData, changeDetailInformation }) {
-    const onChangeDetailInformation = index => changeDetailInformation(index);
+    const onChangeDetailInformation = useCallback(index => changeDetailInformation(index), []);
 
     return (
         <InformationBlock complex>
@@ -12,7 +12,7 @@ export default function AdditionalBockWeather({ listOfData, changeDetailInformat
                     return (
                         <InformationBlockItem key={index} index={index} onClick={() => { onChangeDetailInformation(index); }} active>
                             <Information bold={false} additional>{item.time}</Information>
-                            <Img block="additional" src={iconsCollection.get(item.icon.slice(0, -1))} />
+                            <Img block="additional" src={ICONS_COLLECTION.get(item.icon.slice(0, -1))} />
                             <Information bold={false} additional>
                                 {item.tempetature}
                                 &deg;

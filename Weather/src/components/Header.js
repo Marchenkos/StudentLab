@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Search from "./Search";
 import logo from "../../img/logo.png";
 import { device } from "../style/device";
-import { now, today, fiveDays, delayBeforeSubmit, maxModileWidth } from "../constants";
+import { NOW, TODAY, FIVE_DAYS, DELAY_BEFORE_SUBMIT, MAX_MOBILE_WIDTH } from "../constants";
 import { Img } from "../style/contentStyle";
 import mobileVersionHelper from "../additionalFunctions/mobileVersionHelper";
 import "../style/menu-button.css";
@@ -62,16 +62,16 @@ export default function Header({
     const [isDisplaySearchLine, setDisplaySearchLine] = useState(true);
 
     const modeToFetch = {
-        [now]: () => { onFetchWeatherRequestNow(); },
-        [today]: () => { onFetchWeatherRequestToday(); },
-        [fiveDays]: () => { onFetchWeatherRequestForWeek(); }
+        [NOW]: () => { onFetchWeatherRequestNow(); },
+        [TODAY]: () => { onFetchWeatherRequestToday(); },
+        [FIVE_DAYS]: () => { onFetchWeatherRequestForWeek(); }
     };
 
-    const getWeatherWithDebounce = debounce(mode => modeToFetch[mode.toLowerCase()](), delayBeforeSubmit);
+    const getWeatherWithDebounce = debounce(mode => modeToFetch[mode.toLowerCase()](), DELAY_BEFORE_SUBMIT);
 
     const showSearchLine = () => setDisplaySearchLine(!isDisplaySearchLine);
 
-    const showSearchElements = () => setDisplaySearchLine(window.innerWidth > maxModileWidth);
+    const showSearchElements = () => setDisplaySearchLine(window.innerWidth > MAX_MOBILE_WIDTH);
 
     const getWeather = useCallback((name, mode) => {
         onClearResult();
@@ -81,7 +81,7 @@ export default function Header({
     }, []);
 
     const renderContent = () => {
-        return window.innerWidth < maxModileWidth
+        return window.innerWidth < MAX_MOBILE_WIDTH
             ? (
                 <>
                     <button type="submit" className="icon-menu-outline menu-button" onClick={showSearchLine} />

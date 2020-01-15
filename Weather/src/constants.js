@@ -1,16 +1,16 @@
-export const now = "now";
-export const today = "today";
-export const fiveDays = "5 days";
-export const delayBeforeSubmit = 1500;
-export const maxModileWidth = 850;
-export const maxResult = 3;
+export const NOW = "now";
+export const TODAY = "today";
+export const FIVE_DAYS = "5 days";
+export const DELAY_BEFORE_SUBMIT = 1500;
+export const MAX_MOBILE_WIDTH = 850;
+export const MAX_RESULT = 3;
 export const TIME_PERIOD = {
     NOW: "Now",
     TODAY: "Today",
     FIVE_DAYS: "5 days",
 };
 
-export const iconsCollection = new Map([
+export const ICONS_COLLECTION = new Map([
     ["01", "../../img/weatherImg/sun.png"],
     ["02", "../../img/weatherImg/rainSun.png"],
     ["04", "../../img/weatherImg/brokenClouds.png"],

@@ -3,18 +3,18 @@ import MainBlockWeather from "./MainBlockWeather";
 import { ContentBlock } from "../style/contentStyle";
 
 export default function WeatherNow({ result, cityName }) {
-    const [isLoad, setIsLoad] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         if (!result) {
-            setIsLoad(false);
+            setIsLoaded(false);
         } else {
-            setIsLoad(true);
+            setIsLoaded(true);
         }
     }, [result]);
 
     return (
-        isLoad ? (
+        isLoaded ? (
             <ContentBlock>
                 <MainBlockWeather listOfData={result} cityName={cityName} complex={false} />
             </ContentBlock>
