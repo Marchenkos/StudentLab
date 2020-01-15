@@ -1,5 +1,5 @@
 import React from "react";
-import { iconsCollection } from "../constants";
+import { ICONS_COLLECTION } from "../constants";
 import { InformationBlock, InformationBlockItem, Information, Img } from "../style/contentStyle";
 
 export default function MainBlockWeather({ listOfData, cityName, currentDay }) {
@@ -12,7 +12,7 @@ export default function MainBlockWeather({ listOfData, cityName, currentDay }) {
                     currentDay ? <Information bold>{currentDay}</Information>
                         : null
                 }
-                <Img block="main" src={iconsCollection.get(icon.slice(0, -1))} />
+                <Img block="main" src={ICONS_COLLECTION.get(icon.slice(0, -1))} />
                 <Information bold>
                     {tempetature}
                         &deg;

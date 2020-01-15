@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import styled from "styled-components";
 import { device } from "../style/device";
 import { TIME_PERIOD } from "../constants";
@@ -106,7 +106,7 @@ export default function Search({ getWeather }) {
     const cityNameRef = useRef(null);
     const mode = useRef(null);
 
-    const getWeatherResult = () => getWeather(cityNameRef.current.value, mode.current.value);
+    const getWeatherResult = useCallback(() => getWeather(cityNameRef.current.value, mode.current.value), []);
 
     return (
         <SearchBlock>
