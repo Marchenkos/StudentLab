@@ -13,11 +13,15 @@ const MainContainer = styled.div`
     }
 `;
 
+MainContainer.displayName = "MainContainer";
+
 const MainContent = styled.div`
     text-align: center;
     margin: 0 auto;
     max-width: 1500px;
 `;
+
+MainContent.displayName = "MainContent";
 
 export default class App extends React.Component {
     render() {

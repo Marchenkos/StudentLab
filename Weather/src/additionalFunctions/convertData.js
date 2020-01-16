@@ -38,8 +38,11 @@ export const groupInformation = list => {
             currentDate = item.date;
             result.push(group);
             group = [];
+            group.push(item);
         }
     });
+
+    result.push(group);
 
     return result;
 };

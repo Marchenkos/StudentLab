@@ -5,8 +5,8 @@ import AdditionalBockWeather from "../../components/AdditionalBockWeather";
 
 const { describe, it, expect } = global;
 
-describe("Test for component which renders list of elements", () => {
-    it("Component should render list of items based on props'", () => {
+describe("Test for component which renders the list of the elements", () => {
+    it("Component should render list of items based on props", () => {
         [{ listOfData: [{ icon: "1111" }, { icon: "1111" }], expectedResult: 2 },
             { listOfData: [{ icon: "1111" }], expectedResult: 1 },
             { listOfData: [], expectedResult: 0 }
@@ -21,7 +21,7 @@ describe("Test for component which renders list of elements", () => {
         });
     });
 
-    it("Component should render list of items with child components", () => {
+    it("Component should render list of the items with the child components", () => {
         const props = {
             listOfData: [{ icon: "picture" }],
             changeDetailInformation: () => {}
@@ -34,7 +34,7 @@ describe("Test for component which renders list of elements", () => {
         });
     });
 
-    it("Component should call method when block is clicked", () => {
+    it("Component should call the method when the block is clicked", () => {
         const mockFunction = jest.fn();
         const props = {
             listOfData: [{ icon: "picture" }],
@@ -47,7 +47,7 @@ describe("Test for component which renders list of elements", () => {
         expect(mockFunction).toBeCalled();
     });
 
-    it("Component should render children with the correct styles", () => {
+    it("Component should render the children with the correct styles", () => {
         const props = {
             listOfData: [{ icon: "picture" }],
             changeDetailInformation: () => {}
@@ -62,7 +62,7 @@ describe("Test for component which renders list of elements", () => {
         expect(wrapper.find("Information")).toHaveStyleRule("margin", "10px");
     });
 
-    it("Component render only one child when prop.listOfData is null", () => {
+    it("Component render only one child when the prop.listOfData is null", () => {
         const props = {
             listOfData: null,
             changeDetailInformation: () => {}

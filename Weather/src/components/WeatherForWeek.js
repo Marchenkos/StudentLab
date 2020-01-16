@@ -20,12 +20,16 @@ const Headers = styled.div`
     }
 `;
 
+Headers.displayName = "Headers";
+
 const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 10px auto;
     width: 80%;
 `;
+
+ButtonContainer.displayName = "ButtonContainer";
 
 const Button = styled.button`
     border: none;
@@ -35,6 +39,8 @@ const Button = styled.button`
     font-family: Comic Helvetic;
     font-size: 25px;
 `;
+
+Button.displayName = "Button";
 
 const HeaderItem = styled.button`
     color: white;
@@ -52,6 +58,8 @@ const HeaderItem = styled.button`
         font-size: 16px;
     }
 `;
+
+HeaderItem.displayName = "HeaderItem";
 
 export default function WeatherForWeek({ result, cityName }) {
     const [currentWeather, setCurrentWeather] = useState(result[0]);

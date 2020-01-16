@@ -25,6 +25,8 @@ const HeaderBlock = styled.div`
     }
 `;
 
+HeaderBlock.displayName = "HeaderBlock";
+
 const LogoBlock = styled.div`
     display: flex;
     align-items: flex-end;
@@ -41,6 +43,8 @@ const LogoBlock = styled.div`
     }
 `;
 
+LogoBlock.displayName = "LogoBlock";
+
 const LogoName = styled.span`
     font-family: Hammer Fat;
     font-size: 40px;
@@ -50,6 +54,8 @@ const LogoName = styled.span`
         font-size: 30px;
     }
 `;
+
+LogoName.displayName = "LogoName";
 
 export default function Header({
     onFetchWeatherRequestNow,

@@ -1,5 +1,5 @@
 export function changeStyleForMobile() {
-    document.body.style.background = "white";
+    document.body.style.background = "#ffffff";
 }
 
 export function changeStyleForDesktop() {

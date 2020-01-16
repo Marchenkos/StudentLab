@@ -39,6 +39,8 @@ const Spinner = styled.div`
     }
 `;
 
+Spinner.displayName = "Spinner";
+
 const InformationContainer = styled.div`
     background: linear-gradient(90deg, #0f054a 0px, #5d62a6 100%);
     padding:20px;
@@ -49,6 +51,8 @@ const InformationContainer = styled.div`
         background-size: 100%;
     }
 `;
+
+InformationContainer.displayName = "InformationContainer";
 
 const BackgroundContainer = styled.div`
     background-image: url(../../img/background2.jpg);
@@ -78,9 +82,13 @@ const BackgroundContainer = styled.div`
     }
 `;
 
+BackgroundContainer.displayName = "BackgroundContainer";
+
 const ErroImg = styled.img`
     max-width: 100%;
 `;
+
+ErroImg.displayName = "ErroImg";
 
 export default function Content({ result, cityName, searchMode, error }) {
     const modeToShow = {

@@ -28,14 +28,14 @@ describe("Test for component which renders the main information block", () => {
     });
 
     it("Component render seven Information blocks if props.currentDay is null", () => {
-        const otherProps = {
+        const specialProps = {
             listOfData: { icon: "picture" },
             cityName: "",
             currentDay: null
         };
-        const otherWrapper = mount(<MainBlockWeather {...otherProps} />);
+        const specialWrapper = mount(<MainBlockWeather {...specialProps} />);
 
-        expect(otherWrapper.find("Information").length).toEqual(7);
+        expect(specialWrapper.find("Information").length).toEqual(7);
     });
 
     it("Component render eighth Information blocks if props.currentDay isn't null", () => {
