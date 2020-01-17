@@ -3,11 +3,12 @@ import Header from "../components/Header";
 import { fetchWeatherRequestNow, fetchWeatherRequestToday, fetchWeatherRequestForWeek } from "../actions/fetchWeatherActions";
 import { enterCityName, changeMode } from "../actions/searchWeatherActions";
 import { clearResult } from "../actions/changeResultActions";
+import { selectCityNameSelector, selectSearchModeSelector } from "../selectors/selector";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
-        cityName: state.changeSearchTerms.cityName,
-        searchMode: state.changeSearchTerms.searchMode,
+        cityName: selectCityNameSelector(state),
+        searchMode: selectSearchModeSelector(state),
         result: state.fetchWeather.result,
     };
 };

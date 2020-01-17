@@ -3,13 +3,7 @@ import "jest-styled-components";
 import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import WeatherForWeek from "../../components/WeatherForWeek";
-
-const { describe, it, expect } = global;
-
-const resizeWindow = x => {
-    window.innerWidth = x;
-    window.dispatchEvent(new Event("resize"));
-};
+import { RESIZE_WINDOW } from "../../constants";
 
 describe("Test for component which renders content after search", () => {
     const props = {
@@ -47,7 +41,7 @@ describe("Test for component which renders content after search", () => {
     });
 
     it("Component render the correct content for mobile version", () => {
-        act(() => resizeWindow(500));
+        act(() => RESIZE_WINDOW(500));
 
         const wrapper = mount(<WeatherForWeek {...props} />);
 
@@ -56,7 +50,7 @@ describe("Test for component which renders content after search", () => {
     });
 
     it("Component should pass the props to the children", () => {
-        act(() => resizeWindow(1080));
+        act(() => RESIZE_WINDOW(1080));
 
         const wrapper = mount(<WeatherForWeek {...props} />);
         const expected = {
@@ -70,7 +64,7 @@ describe("Test for component which renders content after search", () => {
     });
 
     it("Component should change the props when the button is clicked", () => {
-        act(() => resizeWindow(500));
+        act(() => RESIZE_WINDOW(500));
 
         const wrapper = mount(<WeatherForWeek {...props} />);
 
@@ -90,7 +84,7 @@ describe("Test for component which renders content after search", () => {
     });
 
     it("Component should render the children with the correct styles", () => {
-        act(() => resizeWindow(1080));
+        act(() => RESIZE_WINDOW(1080));
 
         const wrapper = mount(<WeatherForWeek {...props} />);
 

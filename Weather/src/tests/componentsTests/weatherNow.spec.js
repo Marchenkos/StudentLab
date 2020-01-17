@@ -3,8 +3,6 @@ import "jest-styled-components";
 import { mount } from "enzyme";
 import WeatherNow from "../../components/WeatherNow";
 
-const { describe, it, expect } = global;
-
 describe("Test for component which renders content after search", () => {
     it("Component should render the content if the props.result isn't null", () => {
         const props = {

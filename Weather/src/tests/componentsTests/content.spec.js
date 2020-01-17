@@ -3,16 +3,9 @@ import "jest-styled-components";
 import { shallow, mount } from "enzyme";
 import { act } from "react-dom/test-utils";
 import Content from "../../components/Content";
-import { NOW, TODAY, FIVE_DAYS } from "../../constants";
+import { NOW, TODAY, FIVE_DAYS, RESIZE_WINDOW } from "../../constants";
 import errorPageMobile from "../../../img/errorPageMobile.png";
 import errorPage from "../../../img/errorPage2.png";
-
-const { describe, it, expect } = global;
-
-const resizeWindow = x => {
-    window.innerWidth = x;
-    window.dispatchEvent(new Event("resize"));
-};
 
 describe("Test for component which renders main content", () => {
     it("Component should render the correct content", () => {
@@ -69,7 +62,7 @@ describe("Test for component which renders main content", () => {
 
         expect(wrapper.find("ErroImg").props().src).toEqual(expectedValue.desktopversion);
 
-        act(() => resizeWindow(500));
+        act(() => RESIZE_WINDOW(500));
 
         expect(wrapper.find("ErroImg").props().src).toEqual(expectedValue.mobileVersion);
     });

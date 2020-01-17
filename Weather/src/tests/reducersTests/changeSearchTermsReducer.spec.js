@@ -1,8 +1,6 @@
 import changeSearchTerms from "../../reducers/changeSearchTermsReducer";
 import { ENTER_CITY_NAME, CHANGE_MODE } from "../../actions/searchWeatherActions";
 
-const { describe, it, expect } = global;
-
 describe("Reducer for change search terms", () => {
     const initialState = {
         cityName: null,

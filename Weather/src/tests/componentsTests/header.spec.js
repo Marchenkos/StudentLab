@@ -4,9 +4,8 @@ import { shallow, mount } from "enzyme";
 import { act } from "react-dom/test-utils";
 import * as sinon from "sinon";
 import Header from "../../components/Header";
-import { DELAY_BEFORE_SUBMIT } from "../../constants";
+import { DELAY_BEFORE_SUBMIT, RESIZE_WINDOW } from "../../constants";
 
-const { describe, it, expect } = global;
 let clock;
 
 beforeEach(() => {
@@ -16,11 +15,6 @@ beforeEach(() => {
 afterEach(() => {
     clock.restore();
 });
-
-const resizeWindow = x => {
-    window.innerWidth = x;
-    window.dispatchEvent(new Event("resize"));
-};
 
 describe("Test for component which renders header block", () => {
     const props = {
@@ -97,17 +91,17 @@ describe("Test for component which renders header block", () => {
     it("Component should render the button only for mobile version", () => {
         const wrapper = mount(<Header {...props} />);
 
-        act(() => resizeWindow(500));
+        act(() => RESIZE_WINDOW(500));
 
         expect(wrapper.find("button")).toBeTruthy();
 
-        act(() => resizeWindow(1080));
+        act(() => RESIZE_WINDOW(1080));
 
         expect(wrapper.find("button").length).toBe(0);
     });
 
     it("Hide search line when the button is clicked", () => {
-        act(() => resizeWindow(500));
+        act(() => RESIZE_WINDOW(500));
 
         const wrapper = mount(<Header {...props} />);
 

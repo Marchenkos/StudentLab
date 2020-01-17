@@ -2,8 +2,6 @@ import fetchWeather from "../../reducers/fetchWeatherReducer";
 import { CLEAR_RESULT } from "../../actions/changeResultActions";
 import { FETCH_WEATHER_SUCCESS, FETCH_WEATHER_ERROR } from "../../actions/fetchWeatherActions";
 
-const { describe, it, expect } = global;
-
 describe("Reducer for change result", () => {
     const initialState = {
         result: null,

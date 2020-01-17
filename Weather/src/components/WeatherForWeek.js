@@ -136,9 +136,7 @@ export default function WeatherForWeek({ result, cityName }) {
         }
     }, [currentDay]);
 
-    const changeDetailInformation = useCallback(index => {
-        setDetailInformation(currentWeather[index]);
-    }, [currentWeather]);
+    const changeDetailInformation = useCallback(index => setDetailInformation(currentWeather[index]), [currentWeather]);
 
     return (
         isLoaded ? (

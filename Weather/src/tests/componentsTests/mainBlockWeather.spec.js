@@ -3,8 +3,6 @@ import "jest-styled-components";
 import { mount } from "enzyme";
 import MainBlockWeather from "../../components/MainBlockWeather";
 
-const { describe, it, expect } = global;
-
 describe("Test for component which renders the main information block", () => {
     const props = {
         listOfData: { icon: "picture" },

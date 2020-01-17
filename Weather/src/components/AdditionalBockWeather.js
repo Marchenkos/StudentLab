@@ -3,7 +3,7 @@ import { InformationBlock, InformationBlockItem, Information, Img } from "../sty
 import { ICONS_COLLECTION } from "../constants";
 
 export default function AdditionalBockWeather({ listOfData, changeDetailInformation }) {
-    const onChangeDetailInformation = useCallback(index => changeDetailInformation(index), []);
+    const onChangeDetailInformation = useCallback(index => changeDetailInformation(index), [listOfData]);
 
     return (
         <InformationBlock complex>

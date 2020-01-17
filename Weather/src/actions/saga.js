@@ -1,3 +1,4 @@
+import "regenerator-runtime/runtime";
 import { takeLatest, call, put, select } from "redux-saga/effects";
 import moment from "moment";
 import { getWeatherNow, getWeatherToday, getWeatherForWeek } from "../API/fetchWeather";
@@ -29,17 +30,15 @@ export function* fetchWeatherNow() {
 export function* fetchWeatherToday() {
     try {
         const cityName = yield select(selectCityNameSelector);
-        const searchMode = yield select(selectSearchModeSelector);
 
         const now = moment();
         const currentDate = now.format("YYYY-MM-DD");
 
         if (cityName) {
             const response = yield call(getWeatherToday, cityName, currentDate, MAX_RESULT);
-
             const result = response.map(item => filterInformation(item));
 
-            yield put(fetchUserSuccess(result, searchMode));
+            yield put(fetchUserSuccess(result));
         }
     } catch (error) {
         const { message } = error;
@@ -55,7 +54,6 @@ export function* fetchWeatherForWeek() {
 
         if (cityName) {
             const response = yield call(getWeatherForWeek, cityName);
-
             const result = response.list.map(item => filterInformation(item));
             const groupResult = groupInformation(result, searchMode);
 

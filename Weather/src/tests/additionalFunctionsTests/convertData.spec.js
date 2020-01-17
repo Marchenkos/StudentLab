@@ -1,9 +1,7 @@
 import { filterInformation, groupInformation } from "../../additionalFunctions/convertData";
 import { NOW, TODAY } from "../../constants";
 
-const { describe, it, expect } = global;
-
-describe("Test for functions that convert data", () => {
+describe("Test for functions that transform data", () => {
     it("Function should return object in accordance with the arguments passed", () => {
         const list = {
             main: {
@@ -55,7 +53,7 @@ describe("Test for functions that convert data", () => {
         });
     });
 
-    it("Function should return array without repeating element", () => {
+    it("Function should return an array with grouped data by date", () => {
         const inputValue = [
             {
                 item: "first",

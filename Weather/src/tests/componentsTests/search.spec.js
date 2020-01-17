@@ -3,8 +3,6 @@ import "jest-styled-components";
 import { shallow, mount } from "enzyme";
 import Search from "../../components/Search";
 
-const { describe, it, expect } = global;
-
 describe("Test for component which renders components to search", () => {
     const props = {
         getWeather: () => {}

@@ -3,8 +3,6 @@ import "jest-styled-components";
 import { mount } from "enzyme";
 import WeatherToday from "../../components/WeatherToday";
 
-const { describe, it, expect } = global;
-
 describe("Test for component which renders content after search", () => {
     const props = {
         result: [{

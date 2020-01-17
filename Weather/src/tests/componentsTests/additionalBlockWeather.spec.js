@@ -3,8 +3,6 @@ import "jest-styled-components";
 import { mount } from "enzyme";
 import AdditionalBockWeather from "../../components/AdditionalBockWeather";
 
-const { describe, it, expect } = global;
-
 describe("Test for component which renders the list of the elements", () => {
     it("Component should render list of items based on props", () => {
         [{ listOfData: [{ icon: "1111" }, { icon: "1111" }], expectedResult: 2 },

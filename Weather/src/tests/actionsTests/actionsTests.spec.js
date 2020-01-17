@@ -2,8 +2,6 @@ import * as changeResultActions from "../../actions/changeResultActions";
 import * as fetchWeatherActions from "../../actions/fetchWeatherActions";
 import * as searchWeatherActions from "../../actions/searchWeatherActions";
 
-const { describe, it, expect } = global;
-
 describe("Test for creating an action", () => {
     it("CLEAR_RESULT action creates correctly", () => {
         const expectedAction = {
