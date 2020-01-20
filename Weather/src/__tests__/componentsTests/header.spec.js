@@ -4,7 +4,8 @@ import { shallow, mount } from "enzyme";
 import { act } from "react-dom/test-utils";
 import * as sinon from "sinon";
 import Header from "../../components/Header";
-import { DELAY_BEFORE_SUBMIT, RESIZE_WINDOW } from "../../constants";
+import resizeWindow from "../../additionalFunctions/resizeWindowHelper";
+import { DELAY_BEFORE_SUBMIT } from "../../constants";
 
 let clock;
 
@@ -91,17 +92,17 @@ describe("Test for component which renders header block", () => {
     it("Component should render the button only for mobile version", () => {
         const wrapper = mount(<Header {...props} />);
 
-        act(() => RESIZE_WINDOW(500));
+        act(() => resizeWindow(500));
 
         expect(wrapper.find("button")).toBeTruthy();
 
-        act(() => RESIZE_WINDOW(1080));
+        act(() => resizeWindow(1080));
 
         expect(wrapper.find("button").length).toBe(0);
     });
 
     it("Hide search line when the button is clicked", () => {
-        act(() => RESIZE_WINDOW(500));
+        act(() => resizeWindow(500));
 
         const wrapper = mount(<Header {...props} />);
 
@@ -110,16 +111,5 @@ describe("Test for component which renders header block", () => {
         wrapper.find("button").simulate("click");
 
         expect(wrapper.find("Search").length).toBe(0);
-    });
-
-    it("Component should render the children with the correct style", () => {
-        const wrapper = mount(<Header {...props} />);
-
-        expect(wrapper.find("HeaderBlock")).toHaveStyleRule("padding", "20px 50px");
-        expect(wrapper.find("HeaderBlock")).toHaveStyleRule("display", "flex");
-        expect(wrapper.find("LogoBlock")).toHaveStyleRule("display", "flex");
-        expect(wrapper.find("LogoBlock")).toHaveStyleRule("flex-grow", "1");
-        expect(wrapper.find("LogoName")).toHaveStyleRule("font-family", "Hammer Fat");
-        expect(wrapper.find("LogoName")).toHaveStyleRule("font-size", "40px");
     });
 });

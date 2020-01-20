@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Content from "../components/Content";
-import { selectCityNameSelector, selectSearchModeSelector } from "../selectors/selector";
+import { selectCityNameSelector, selectSearchModeSelector } from "../selectors/selectors";
 
 const mapStateToProps = state => {
     return {

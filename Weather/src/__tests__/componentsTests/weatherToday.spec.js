@@ -5,15 +5,17 @@ import WeatherToday from "../../components/WeatherToday";
 
 describe("Test for component which renders content after search", () => {
     const props = {
-        result: [{
-            tempetature: "",
-            feelsLike: "",
-            humidity: "",
-            pressure: "",
-            wind: "",
-            weather: "",
-            icon: "picture"
-        }],
+        result: [
+            {
+                tempetature: "",
+                feelsLike: "",
+                humidity: "",
+                pressure: "",
+                wind: "",
+                weather: "",
+                icon: "picture"
+            }
+        ],
         cityName: "city"
     };
 
@@ -25,15 +27,10 @@ describe("Test for component which renders content after search", () => {
         expect(wrapper.find("AdditionalBockWeather").length).toBe(1);
     });
 
-    it("Component should render the children with the correct styles", () => {
-        expect(wrapper.find("ContentBlock")).toHaveStyleRule("width", "50%");
-        expect(wrapper.find("ContentBlock")).toHaveStyleRule("font-family", "Colos Text");
-        expect(wrapper.find("ContentBlock")).toHaveStyleRule("height", "auto");
-    });
-
     it("Component should pass the props to the child", () => {
         expect(wrapper.find("MainBlockWeather").props().listOfData).toEqual(props.result[0]);
         expect(wrapper.find("MainBlockWeather").props().cityName).toEqual(props.cityName);
         expect(wrapper.find("AdditionalBockWeather").props().listOfData).toEqual(props.result);
     });
+    
 });

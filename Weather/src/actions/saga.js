@@ -6,8 +6,8 @@ import { FETCH_WEATHER_REQUEST_NOW,
     FETCH_WEATHER_REQUEST_TODAY,
     FETCH_WEATHER_REQUEST_FOR_WEEK,
     fetchUserSuccess, fetchUserError } from "./fetchWeatherActions";
-import { selectCityNameSelector, selectSearchModeSelector } from "../selectors/selector";
-import { filterInformation, groupInformation } from "../additionalFunctions/convertData";
+import { selectCityNameSelector, selectSearchModeSelector } from "../selectors/selectors";
+import { filterInformation, groupInformation } from "../additionalFunctions/convertDataHelpers";
 import { MAX_RESULT } from "../constants";
 
 export function* fetchWeatherNow() {

@@ -5,7 +5,9 @@ import MainBlockWeather from "../../components/MainBlockWeather";
 
 describe("Test for component which renders the main information block", () => {
     const props = {
-        listOfData: { icon: "picture" },
+        listOfData: {
+            icon: "picture"
+        },
         cityName: "",
         currentDay: "monday"
     };
@@ -27,7 +29,9 @@ describe("Test for component which renders the main information block", () => {
 
     it("Component render seven Information blocks if props.currentDay is null", () => {
         const specialProps = {
-            listOfData: { icon: "picture" },
+            listOfData: {
+                icon: "picture"
+            },
             cityName: "",
             currentDay: null
         };
@@ -38,20 +42,5 @@ describe("Test for component which renders the main information block", () => {
 
     it("Component render eighth Information blocks if props.currentDay isn't null", () => {
         expect(wrapper.find("Information").length).toEqual(8);
-    });
-
-    it("Component should render children with the correct styles", () => {
-        expect(wrapper.find("InformationBlock")).toHaveStyleRule("display", "flex");
-        expect(wrapper.find("InformationBlock")).toHaveStyleRule("align-items", "center");
-        expect(wrapper.find("Img")).toHaveStyleRule("max-width", "85px");
-
-        wrapper.find("Information").forEach(child => {
-            if (child.prop("bold")) {
-                expect(child).toHaveStyleRule("font-weight", "bold");
-                expect(child).toHaveStyleRule("font-size", "30px");
-            } else {
-                expect(child).toHaveStyleRule("font-size", "20px");
-            }
-        });
     });
 });

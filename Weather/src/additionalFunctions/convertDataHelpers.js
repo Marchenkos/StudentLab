@@ -1,3 +1,4 @@
+import groupby from "lodash.groupby";
 import { NOW } from "../constants";
 
 export const filterInformation = (list, mode) => {
@@ -27,22 +28,7 @@ export const filterInformation = (list, mode) => {
 };
 
 export const groupInformation = list => {
-    const result = [];
-    let group = [];
-    let currentDate = list[0].date;
+    const resultObject = groupby(list, "date");
 
-    list.map(item => {
-        if (item.date === currentDate) {
-            group.push(item);
-        } else {
-            currentDate = item.date;
-            result.push(group);
-            group = [];
-            group.push(item);
-        }
-    });
-
-    result.push(group);
-
-    return result;
+    return Object.values(resultObject);
 };

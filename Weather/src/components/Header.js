@@ -6,7 +6,7 @@ import logo from "../../img/logo.png";
 import { device } from "../style/device";
 import { NOW, TODAY, FIVE_DAYS, DELAY_BEFORE_SUBMIT, MAX_MOBILE_WIDTH } from "../constants";
 import { Img } from "../style/contentStyle";
-import mobileVersionHelper from "../additionalFunctions/mobileVersionHelper";
+import { mobileVersionHelper } from "../additionalFunctions/mobileVersionHelpers";
 import "../style/menu-button.css";
 
 const HeaderBlock = styled.div`

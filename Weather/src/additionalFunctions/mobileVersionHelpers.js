@@ -1,3 +1,9 @@
+export function mobileVersionHelper(callback) {
+    window.addEventListener("resize", callback);
+
+    return () => window.removeEventListener("resize", callback);
+}
+
 export function changeStyleForMobile() {
     document.body.style.background = "#ffffff";
 }

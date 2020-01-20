@@ -27,21 +27,6 @@ describe("Test for component which renders content after search", () => {
         expect(wrapper.exists()).toBeTruthy();
     });
 
-    it("Component should render the children with the correct styles", () => {
-        const props = {
-            result: {
-                icon: "picture"
-            },
-            cityName: ""
-        };
-
-        const wrapper = mount(<WeatherNow {...props} />);
-
-        expect(wrapper.find("ContentBlock")).toHaveStyleRule("width", "50%");
-        expect(wrapper.find("ContentBlock")).toHaveStyleRule("font-family", "Colos Text");
-        expect(wrapper.find("ContentBlock")).toHaveStyleRule("height", "auto");
-    });
-
     it("Component should pass the props to the child", () => {
         const props = {
             result: {

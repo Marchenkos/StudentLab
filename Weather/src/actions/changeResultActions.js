@@ -5,3 +5,4 @@ export const clearResult = () => {
         type: CLEAR_RESULT
     };
 };
+

@@ -1,4 +1,4 @@
-import { filterInformation, groupInformation } from "../../additionalFunctions/convertData";
+import { filterInformation, groupInformation } from "../../additionalFunctions/convertDataHelpers";
 import { NOW, TODAY } from "../../constants";
 
 describe("Test for functions that transform data", () => {
@@ -11,7 +11,6 @@ describe("Test for functions that transform data", () => {
                 pressure: "2000"
             },
             dt_txt: "11-02-2000 15:00:00",
-            
             wind: {
                 speed: 100,
             },
@@ -46,8 +45,15 @@ describe("Test for functions that transform data", () => {
             },
         };
 
-        [{ mode: NOW, expectedResult: expectedOutput.modeIsNow },
-            { mode: TODAY, expectedResult: expectedOutput.modeIsNotNow }
+        [
+            {
+                mode: NOW,
+                expectedResult: expectedOutput.modeIsNow
+            },
+            {
+                mode: TODAY,
+                expectedResult: expectedOutput.modeIsNotNow
+            }
         ].forEach(({ mode, expectedResult }) => {
             expect(filterInformation(list, mode)).toEqual(expectedResult);
         });
@@ -78,15 +84,30 @@ describe("Test for functions that transform data", () => {
         ];
         const outputValue = [
             [
-                { item: "first", date: "02.03.20" },
-                { item: "second", date: "02.03.20" }
+                {
+                    item: "first",
+                    date: "02.03.20"
+                },
+                {
+                    item: "second",
+                    date: "02.03.20"
+                }
             ],
             [
-                { item: "third", date: "03.03.20" },
-                { item: "fourth", date: "03.03.20" }
+                {
+                    item: "third",
+                    date: "03.03.20"
+                },
+                {
+                    item: "fourth",
+                    date: "03.03.20"
+                }
             ],
             [
-                { item: "fifth", date: "02.05.20" }
+                {
+                    item: "fifth",
+                    date: "02.05.20"
+                }
             ]
         ];
 

@@ -47,21 +47,6 @@ describe("Test for component which renders components to search", () => {
         expect(wrapper.find("input").instance().value).toEqual(expectedValue);
     });
 
-    it("Component should render the children with the correct style", () => {
-        const wrapper = mount(<Search {...props} />);
-
-        expect(wrapper.find("SearchBlock")).toHaveStyleRule("display", "flex");
-        expect(wrapper.find("SearchBlock")).toHaveStyleRule("align-items", "flex-end");
-        expect(wrapper.find("Select")).toHaveStyleRule("height", "35px");
-        expect(wrapper.find("Select")).toHaveStyleRule("font-size", "20px");
-        expect(wrapper.find("Option")).toHaveStyleRule("font-family", "Comic Helvetic");
-        expect(wrapper.find("Option")).toHaveStyleRule("font-size", "20px");
-        expect(wrapper.find("Option")).toHaveStyleRule("color", "#0f054a");
-        expect(wrapper.find("SearchLine")).toHaveStyleRule("border", "none");
-        expect(wrapper.find("SearchLine")).toHaveStyleRule("border-radius", "2px");
-        expect(wrapper.find("SearchButton")).toHaveStyleRule("max-width", "40px");
-    });
-
     it("Change props.value if's some option is selected", () => {
         const expectedValue = {
             firstValue: "Now",

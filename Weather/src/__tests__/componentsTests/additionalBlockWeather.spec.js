@@ -5,9 +5,30 @@ import AdditionalBockWeather from "../../components/AdditionalBockWeather";
 
 describe("Test for component which renders the list of the elements", () => {
     it("Component should render list of items based on props", () => {
-        [{ listOfData: [{ icon: "1111" }, { icon: "1111" }], expectedResult: 2 },
-            { listOfData: [{ icon: "1111" }], expectedResult: 1 },
-            { listOfData: [], expectedResult: 0 }
+        [
+            {
+                listOfData: [
+                    {
+                        icon: "1111"
+                    },
+                    {
+                        icon: "1111"
+                    }
+                ],
+                expectedResult: 2
+            },
+            {
+                listOfData: [
+                    {
+                        icon: "1111"
+                    }
+                ],
+                expectedResult: 1
+            },
+            {
+                listOfData: [],
+                expectedResult: 0
+            }
         ].forEach(({ listOfData, expectedResult }) => {
             const props = {
                 listOfData,
@@ -21,7 +42,11 @@ describe("Test for component which renders the list of the elements", () => {
 
     it("Component should render list of the items with the child components", () => {
         const props = {
-            listOfData: [{ icon: "picture" }],
+            listOfData: [
+                {
+                    icon: "picture"
+                }
+            ],
             changeDetailInformation: () => {}
         };
         const wrapper = mount(<AdditionalBockWeather {...props} />);
@@ -35,7 +60,11 @@ describe("Test for component which renders the list of the elements", () => {
     it("Component should call the method when the block is clicked", () => {
         const mockFunction = jest.fn();
         const props = {
-            listOfData: [{ icon: "picture" }],
+            listOfData: [
+                {
+                    icon: "picture"
+                }
+            ],
             changeDetailInformation: mockFunction
         };
 
@@ -45,19 +74,23 @@ describe("Test for component which renders the list of the elements", () => {
         expect(mockFunction).toBeCalled();
     });
 
-    it("Component should render the children with the correct styles", () => {
+    it("Component should render the children with the correct styles for different versions", () => {
         const props = {
-            listOfData: [{ icon: "picture" }],
+            listOfData: [
+                {
+                    icon: "picture"
+                }
+            ],
             changeDetailInformation: () => {}
         };
 
         const wrapper = mount(<AdditionalBockWeather {...props} />);
 
-        expect(wrapper.find("InformationBlock")).toHaveStyleRule("display", "flex");
-        expect(wrapper.find("InformationBlock")).toHaveStyleRule("align-items", "center");
-        expect(wrapper.find("Img")).toHaveStyleRule("max-width", "50px");
-        expect(wrapper.find("Information")).toHaveStyleRule("font-size", "20px");
-        expect(wrapper.find("Information")).toHaveStyleRule("margin", "10px");
+        expect(wrapper.find("InformationBlock")).not.toHaveStyleRule("flex-direction", "column");
+
+        expect(wrapper.find("InformationBlock")).toHaveStyleRule("flex-direction", "column", {
+            media: "(max-width:850px)"
+        });
     });
 
     it("Component render only one child when the prop.listOfData is null", () => {

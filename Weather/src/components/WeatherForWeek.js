@@ -6,7 +6,7 @@ import AdditionalBockWeather from "./AdditionalBockWeather";
 import { MAX_MOBILE_WIDTH, MAX_TABLET_WIDTH } from "../constants";
 import { device } from "../style/device";
 import { ContentBlock } from "../style/contentStyle";
-import mobileVersionHelper from "../additionalFunctions/mobileVersionHelper";
+import { mobileVersionHelper } from "../additionalFunctions/mobileVersionHelpers";
 
 const Headers = styled.div`
     font-family: Comic Helvetic;
@@ -75,15 +75,14 @@ export default function WeatherForWeek({ result, cityName }) {
     const [isMobileVersion, setIsMobileVersion] = useState(window.innerWidth < MAX_MOBILE_WIDTH);
     const [isTabletVersion, setIsTabletVersion] = useState(window.innerWidth < MAX_TABLET_WIDTH);
 
-
     const changeVersion = () => {
         setIsMobileVersion(window.innerWidth < MAX_MOBILE_WIDTH);
         setIsTabletVersion(window.innerWidth < MAX_TABLET_WIDTH);
     };
 
-    const chooseDay = e => setCurrentDay(e.target.value);
+    const chooseDay = useCallback(e => setCurrentDay(e.target.value), []);
 
-    const changeDay = e => {
+    const changeDay = useCallback(e => {
         const currentIndex = daysOfTheWeek.indexOf(currentDay);
 
         if (e.target.value === "next") {
@@ -93,7 +92,7 @@ export default function WeatherForWeek({ result, cityName }) {
         } else if (currentIndex - 1 > -1) {
             setCurrentDay(daysOfTheWeek[currentIndex - 1]);
         }
-    };
+    }, []);
 
     const renderForMobileVersion = () => {
         return (

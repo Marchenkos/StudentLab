@@ -5,8 +5,7 @@ import WeatherToday from "./WeatherToday";
 import WeatherNow from "./WeatherNow";
 import { device } from "../style/device";
 import { NOW, TODAY, FIVE_DAYS, MAX_MOBILE_WIDTH } from "../constants";
-import { changeStyleForMobile, changeStyleForDesktop } from "../additionalFunctions/changeStyleForMobile";
-import mobileVersionHelper from "../additionalFunctions/mobileVersionHelper";
+import { changeStyleForMobile, changeStyleForDesktop, mobileVersionHelper } from "../additionalFunctions/mobileVersionHelpers";
 import errorPageMobile from "../../img/errorPageMobile.png";
 import errorPage from "../../img/errorPage2.png";
 

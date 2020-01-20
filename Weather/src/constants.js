@@ -22,8 +22,3 @@ export const ICONS_COLLECTION = new Map([
     ["13", "../../img/weatherImg/snow.png"],
     ["50", "../../img/weatherImg/tornado.png"]
 ]);
-
-export const RESIZE_WINDOW = x => {
-    window.innerWidth = x;
-    window.dispatchEvent(new Event("resize"));
-};
