@@ -140,7 +140,7 @@ export const ContentBlock = styled.div`
     };
 
     ${({ complex }) => complex && `
-        background: linear-gradient(90deg, #0f054a 0px, #5d62a6 100%);
+        background-image: url(../../img/backgroundWindow.jpg);
         display: flex;
         flex-direction: column;
         width: 65%;

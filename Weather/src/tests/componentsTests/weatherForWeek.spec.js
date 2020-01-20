@@ -89,7 +89,7 @@ describe("Test for component which renders content after search", () => {
         const wrapper = mount(<WeatherForWeek {...props} />);
 
         expect(wrapper.find("Headers")).toHaveStyleRule("font-family", "Comic Helvetic");
-        expect(wrapper.find("Headers")).toHaveStyleRule("width", "50%");
+        expect(wrapper.find("Headers")).toHaveStyleRule("width", "60%");
         expect(wrapper.find("HeaderItem")).toHaveStyleRule("color", "white");
         expect(wrapper.find("ContentBlock")).toHaveStyleRule("display", "flex");
         expect(wrapper.find("ContentBlock")).toHaveStyleRule("width", "65%");

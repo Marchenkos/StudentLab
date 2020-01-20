@@ -36,34 +36,42 @@ describe("Test for creating an action", () => {
     });
 
     it("FETCH_WEATHER_SUCCESS action creates correctly", () => {
+        const result = [];
         const expectedAction = {
             type: fetchWeatherActions.FETCH_WEATHER_SUCCESS,
+            result
         };
 
-        expect(fetchWeatherActions.fetchUserSuccess()).toEqual(expectedAction);
+        expect(fetchWeatherActions.fetchUserSuccess(result)).toEqual(expectedAction);
     });
 
     it("FETCH_WEATHER_ERROR action creates correctly", () => {
+        const errorMessage = "404";
         const expectedAction = {
             type: fetchWeatherActions.FETCH_WEATHER_ERROR,
+            errorMessage
         };
 
-        expect(fetchWeatherActions.fetchUserError()).toEqual(expectedAction);
+        expect(fetchWeatherActions.fetchUserError(errorMessage)).toEqual(expectedAction);
     });
 
     it("CHANGE_MODE action creates correctly", () => {
+        const searchMode = "today";
         const expectedAction = {
             type: searchWeatherActions.CHANGE_MODE,
+            value: searchMode
         };
 
-        expect(searchWeatherActions.changeMode()).toEqual(expectedAction);
+        expect(searchWeatherActions.changeMode(searchMode)).toEqual(expectedAction);
     });
 
     it("ENTER_CITY_NAME action creates correctly", () => {
+        const cityName = "London";
         const expectedAction = {
             type: searchWeatherActions.ENTER_CITY_NAME,
+            value: cityName
         };
 
-        expect(searchWeatherActions.enterCityName()).toEqual(expectedAction);
+        expect(searchWeatherActions.enterCityName(cityName)).toEqual(expectedAction);
     });
 });

@@ -3,6 +3,7 @@ export const TODAY = "today";
 export const FIVE_DAYS = "5 days";
 export const DELAY_BEFORE_SUBMIT = 1500;
 export const MAX_MOBILE_WIDTH = 850;
+export const MAX_TABLET_WIDTH = 1080;
 export const MAX_RESULT = 3;
 export const TIME_PERIOD = {
     NOW: "Now",

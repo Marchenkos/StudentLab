@@ -3,7 +3,7 @@ import moment from "moment";
 import styled from "styled-components";
 import MainBlockWeather from "./MainBlockWeather";
 import AdditionalBockWeather from "./AdditionalBockWeather";
-import { MAX_MOBILE_WIDTH } from "../constants";
+import { MAX_MOBILE_WIDTH, MAX_TABLET_WIDTH } from "../constants";
 import { device } from "../style/device";
 import { ContentBlock } from "../style/contentStyle";
 import mobileVersionHelper from "../additionalFunctions/mobileVersionHelper";
@@ -11,12 +11,12 @@ import mobileVersionHelper from "../additionalFunctions/mobileVersionHelper";
 const Headers = styled.div`
     font-family: Comic Helvetic;
     display: flex;
-    width: 50%;
+    width: 60%;
     justify-content: space-between;
     margin: 0 auto;
 
     @media ${device.tablet} {
-        width: 68%;
+        width: 65%;
     }
 `;
 
@@ -57,6 +57,11 @@ const HeaderItem = styled.button`
     @media ${device.laptop} {
         font-size: 16px;
     }
+
+    @media ${device.tablet} {
+        padding: 10px 15px;
+        font-size: 20px;
+    }
 `;
 
 HeaderItem.displayName = "HeaderItem";
@@ -68,8 +73,13 @@ export default function WeatherForWeek({ result, cityName }) {
     const [detailInformation, setDetailInformation] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
     const [isMobileVersion, setIsMobileVersion] = useState(window.innerWidth < MAX_MOBILE_WIDTH);
+    const [isTabletVersion, setIsTabletVersion] = useState(window.innerWidth < MAX_TABLET_WIDTH);
 
-    const changeVersion = () => setIsMobileVersion(window.innerWidth < MAX_MOBILE_WIDTH);
+
+    const changeVersion = () => {
+        setIsMobileVersion(window.innerWidth < MAX_MOBILE_WIDTH);
+        setIsTabletVersion(window.innerWidth < MAX_TABLET_WIDTH);
+    };
 
     const chooseDay = e => setCurrentDay(e.target.value);
 
@@ -146,9 +156,12 @@ export default function WeatherForWeek({ result, cityName }) {
                         <Headers>
                             {
                                 daysOfTheWeek.map((day, index) => {
+                                    const dayForVersion = isTabletVersion ? day.slice(0, 3)
+                                        : day;
+
                                     return (
                                         <HeaderItem key={index} onClick={chooseDay} value={day} active={day === currentDay}>
-                                            {day}
+                                            {dayForVersion}
                                         </HeaderItem>
                                     );
                                 })
