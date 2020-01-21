@@ -32,5 +32,4 @@ describe("Test for component which renders content after search", () => {
         expect(wrapper.find("MainBlockWeather").props().cityName).toEqual(props.cityName);
         expect(wrapper.find("AdditionalBockWeather").props().listOfData).toEqual(props.result);
     });
-    
 });

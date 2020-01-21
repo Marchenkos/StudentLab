@@ -33,6 +33,7 @@ describe("Test for component which renders content after search", () => {
         ],
         cityName: "city"
     };
+
     it("Component should render the content if the props.result isn't null", () => {
         const wrapper = mount(<WeatherForWeek {...props} />);
 
