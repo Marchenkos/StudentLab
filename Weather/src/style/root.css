@@ -1,0 +1,13 @@
+#root {
+    min-width: 360px;
+}
+
+body {
+    background: linear-gradient(90deg,#0d014b 0px,#6c6ab5 100%);
+}
+
+@media (max-width: 850px) {
+    body {
+        background: #5b5b5b;
+    }
+}
