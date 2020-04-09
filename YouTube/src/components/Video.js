@@ -31,7 +31,7 @@ export default class Video extends React.Component {
     };
 
     viewVideo = () => {
-        window.location = `https://www.youtube.com/watch?v=${this.props.id}`;
+        window.location = `https://www.youtube.com/watch?v=${this.props.value.id}`;
     };
 
     showVideoDescription = () => {

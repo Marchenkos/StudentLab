@@ -20,7 +20,7 @@ export default function Content({
     const [isFetching, setIsFetching] = useState(false);
 
     const handleScroll = () => {
-        if (window.innerHeight + window.pageYOffset !== document.documentElement.offsetHeight) {
+        if (window.innerHeight + window.pageYOffset < document.documentElement.offsetHeight) {
             return;
         }
 
@@ -63,11 +63,10 @@ export default function Content({
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
-
-        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     useEffect(() => {
+        console.log(totalResult, listItems.length, isFetching);
         if (totalResult > listItems.length && isFetching) {
             onLoadMore(videoName, nextPageToken);
             fetchMoreListItems();
